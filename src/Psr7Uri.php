@@ -21,11 +21,14 @@ class Psr7Uri extends Uri
 
 	/**
 	 * @param UrlScript $url
-	 * @return void
+	 * @return static
 	 */
-	public function setUrlScript(UrlScript $url)
+	public function withUrlScript(UrlScript $url)
 	{
-		$this->urlScript = $url;
+		$new = clone $this;
+		$new->urlScript = $url;
+
+		return $new;
 	}
 
 }

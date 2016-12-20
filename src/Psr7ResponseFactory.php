@@ -8,6 +8,14 @@ class Psr7ResponseFactory
 {
 
 	/**
+	 * @return Psr7Response
+	 */
+	public static function fromGlobal()
+	{
+		return new Psr7Response();
+	}
+
+	/**
 	 * @param Response $response
 	 * @return Psr7Response
 	 */

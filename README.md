@@ -1,6 +1,6 @@
 # PSR-7 - Http Message Interface
 
-:boom: Powerfull API (REST/GraphQL) to Nette Framework (@nette)
+:dizzy: PSR #7 [HTTP Message Interface] to Nette Framework.
 
 -----
 
@@ -23,19 +23,66 @@
 composer require contributte/psr-7
 ```
 
-## Version
+## PSR-7
 
-| Version 	| Status             	| Composer   	| Shields 	|
-|---------	|-------------------	|------------	|---------	|
-| dev     	| heavy development 	| dev-master 	|[![Shield](https://img.shields.io/packagist/vpre/contributte/psr-7.svg?style=flat-square)](https://packagist.org/packages/contributte/psr-7)|
+This package is based on great [guzzle/psr7](https://github.com/guzzle/psr7) implementation. And adds some extra features for usage in Nette Framework.
 
-## Documentation
+## Usage
 
-@todo
+### `Psr7Request`
 
------
+The easiest way is create request over `Psr7RequestFactory`.
 
-The development is sponsored by [Tlapnet](http://www.tlapnet.cz). Thank you guys! :+1:
+```php
+use Contributte\Psr7\Psr7RequestFactory;
+
+$psr7 = Psr7RequestFactory::fromGlobal();
+```
+
+```php
+use Contributte\Psr7\Psr7RequestFactory;
+
+$httpRequest = new Request();
+$psr7 = Psr7RequestFactory::fromNette($httpRequest);
+```
+
+You can fill [`httpRequest`](https://api.nette.org/2.4/Nette.Http.Request.html) and [`applicationRequest`](https://api.nette.org/2.4/Nette.Application.Request.html) over methods:
+
+```php
+use Contributte\Psr7\Psr7RequestFactory;
+
+$psr7 = Psr7RequestFactory::fromGlobal();
+$psr7 = $psr7->withHttpRequest($httpRequest);
+$psr7 = $psr7->withApplicationRequest($applicationRequest);
+```
+
+### `Psr7Response`
+
+
+The easiest way is create request over `Psr7ResponseFactory`.
+
+```php
+use Contributte\Psr7\Psr7ResponseFactory;
+
+$psr7 = Psr7ResponseFactory::fromGlobal();
+```
+
+```php
+use Contributte\Psr7\Psr7ResponseFactory;
+
+$httpResponse = new Response();
+$psr7 = Psr7ResponseFactory::fromNette($httpResponse);
+```
+
+You can fill [`httpResponse`](https://api.nette.org/2.4/Nette.Http.Response.html) and [`applicationResponse`](https://api.nette.org/2.4/Nette.Application.IResponse.html) over methods:
+
+```php
+use Contributte\Psr7\Psr7ResponseFactory;
+
+$psr7 = Psr7RequestFactory::fromGlobal();
+$psr7 = $psr7->withHttpResponse($httpResponse);
+$psr7 = $psr7->withApplicationResponse($applicationResponse);
+```
 
 -----
 
