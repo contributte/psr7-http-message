@@ -4,14 +4,15 @@
 
 -----
 
-[![Build Status](https://img.shields.io/travis/contributte/psr-7.svg?style=flat-square)](https://travis-ci.org/contributte/psr-7)
-[![Code coverage](https://img.shields.io/coveralls/contributte/psr-7.svg?style=flat-square)](https://coveralls.io/r/contributte/psr-7)
+[![Build Status](https://img.shields.io/travis/contributte/psr7-http-message.svg?style=flat-square)](https://travis-ci.org/contributte/psr7-http-message)
+[![Code coverage](https://img.shields.io/coveralls/contributte/psr7-http-message.svg?style=flat-square)](https://coveralls.io/r/contributte/psr7-http-message)
+[![HHVM Status](https://img.shields.io/hhvm/contributte/psr-7.svg?style=flat-square)](http://hhvm.h4cc.de/package/contributte/psr-7)
+[![Licence](https://img.shields.io/packagist/l/contributte/psr-7.svg?style=flat-square)](https://packagist.org/packages/contributte/psr-7)
+
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/psr-7.svg?style=flat-square)](https://packagist.org/packages/contributte/psr-7)
 [![Downloads total](https://img.shields.io/packagist/dt/contributte/psr-7.svg?style=flat-square)](https://packagist.org/packages/contributte/psr-7)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/psr-7.svg?style=flat-square)](https://packagist.org/packages/contributte/psr-7)
 [![Latest unstable](https://img.shields.io/packagist/vpre/contributte/psr-7.svg?style=flat-square)](https://packagist.org/packages/contributte/psr-7)
-[![Licence](https://img.shields.io/packagist/l/contributte/psr-7.svg?style=flat-square)](https://packagist.org/packages/contributte/psr-7)
-[![HHVM Status](https://img.shields.io/hhvm/contributte/psr-7.svg?style=flat-square)](http://hhvm.h4cc.de/package/contributte/psr-7)
 
 ## Discussion / Help
 
