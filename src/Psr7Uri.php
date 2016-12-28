@@ -5,6 +5,9 @@ namespace Contributte\Psr7;
 use GuzzleHttp\Psr7\Uri;
 use Nette\Http\UrlScript;
 
+/**
+ * @author Milan Felix Sulc <sulcmil@gmail.com>
+ */
 class Psr7Uri extends Uri
 {
 

@@ -5,6 +5,9 @@ namespace Contributte\Psr7;
 use Nette\Http\Request;
 use Nette\Http\RequestFactory;
 
+/**
+ * @author Milan Felix Sulc <sulcmil@gmail.com>
+ */
 class Psr7RequestFactory
 {
 

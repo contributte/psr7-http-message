@@ -8,6 +8,9 @@ use Nette\Http\IResponse as IHttpResponse;
 use Nette\Http\RequestFactory;
 use Nette\InvalidStateException;
 
+/**
+ * @author Milan Felix Sulc <sulcmil@gmail.com>
+ */
 class Psr7Response extends Response
 {
 

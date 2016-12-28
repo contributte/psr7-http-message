@@ -4,6 +4,9 @@ namespace Contributte\Psr7;
 
 use Nette\Http\Response;
 
+/**
+ * @author Milan Felix Sulc <sulcmil@gmail.com>
+ */
 class Psr7ResponseFactory
 {
 
