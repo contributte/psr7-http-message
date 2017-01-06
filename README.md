@@ -16,7 +16,7 @@
 
 ## Discussion / Help
 
-[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](https://gitter.im/contributte/contributte?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
 
 ## Install
 
@@ -24,66 +24,33 @@
 composer require contributte/psr-7
 ```
 
-## PSR-7
+## Versions
 
-This package is based on great [guzzle/psr7](https://github.com/guzzle/psr7) implementation. And adds some extra features for usage in Nette Framework.
+| State       | Version | Branch   | PHP      |
+|-------------|---------|----------|----------|
+| development | `^0.1`  | `master` | `>= 5.6` |
 
-## Usage
+## Prolog
 
-### `Psr7Request`
+Middleware / Relay pattern is widely used for handling any HTTP request. Such as API request or just any suitable requests. 
+In PHP world there are a many solutions and prepared libraries. 
 
-The easiest way is create request over `Psr7RequestFactory`.
+This packages is based on great a probably best known PSR-7 library [guzzle/psr-7](https://github.com/guzzle/psr7).
 
-```php
-use Contributte\Psr7\Psr7RequestFactory;
+Other libraries:
 
-$psr7 = Psr7RequestFactory::fromGlobal();
-```
+- [oscarotero/psr7-middlewares](https://github.com/oscarotero/psr7-middlewares) - biggest collection of PHP middlewares
+- [stackphp](https://github.com/stackphp) - connect middleware pattern and symfony HttpKernel
+- [zendframework/zend-diactoros](https://github.com/zendframework/zend-diactoros/) - Zend PSR-7 middleware
 
-```php
-use Contributte\Psr7\Psr7RequestFactory;
+## Design
 
-$httpRequest = new Request();
-$psr7 = Psr7RequestFactory::fromNette($httpRequest);
-```
+@wireframe
 
-You can fill [`httpRequest`](https://api.nette.org/2.4/Nette.Http.Request.html) and [`applicationRequest`](https://api.nette.org/2.4/Nette.Application.Request.html) over methods:
+## Overview
 
-```php
-use Contributte\Psr7\Psr7RequestFactory;
-
-$psr7 = Psr7RequestFactory::fromGlobal();
-$psr7 = $psr7->withHttpRequest($httpRequest);
-$psr7 = $psr7->withApplicationRequest($applicationRequest);
-```
-
-### `Psr7Response`
-
-
-The easiest way is create request over `Psr7ResponseFactory`.
-
-```php
-use Contributte\Psr7\Psr7ResponseFactory;
-
-$psr7 = Psr7ResponseFactory::fromGlobal();
-```
-
-```php
-use Contributte\Psr7\Psr7ResponseFactory;
-
-$httpResponse = new Response();
-$psr7 = Psr7ResponseFactory::fromNette($httpResponse);
-```
-
-You can fill [`httpResponse`](https://api.nette.org/2.4/Nette.Http.Response.html) and [`applicationResponse`](https://api.nette.org/2.4/Nette.Application.IResponse.html) over methods:
-
-```php
-use Contributte\Psr7\Psr7ResponseFactory;
-
-$psr7 = Psr7RequestFactory::fromGlobal();
-$psr7 = $psr7->withHttpResponse($httpResponse);
-$psr7 = $psr7->withApplicationResponse($applicationResponse);
-```
+- [Psr7Request](https://github.com/contributte/psr-7-http-message/blob/master/.docs/README.md#psr7request)
+- [Psr7Response](https://github.com/contributte/psr-7-http-message/blob/master/.docs/README.md#psr7response)
 
 -----
 
