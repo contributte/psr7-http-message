@@ -32,10 +32,12 @@ composer require contributte/psr-7
 
 ## Prolog
 
-Middleware / Relay pattern is widely used for handling any HTTP request. Such as API request or just any suitable requests. 
-In PHP world there are a many solutions and prepared libraries. 
+Middleware / Relay pattern is widely used for handling any HTTP requests, such as API request, streams, dynamic websites 
+or just any suitable requests.
 
-This packages is based on great a probably best known PSR-7 library [guzzle/psr-7](https://github.com/guzzle/psr7).
+We have a many solutions and prepared libraries in PHP world. 
+
+This packages is based on great a probably best known library for PSR-7, it's called [guzzle/psr-7](https://github.com/guzzle/psr7).
 
 Other libraries:
 
