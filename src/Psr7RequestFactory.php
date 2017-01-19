@@ -29,7 +29,9 @@ class Psr7RequestFactory
 	{
 		$psr7 = new Psr7Request(
 			$request->getMethod(),
-			Psr7UriFactory::fromNette($request->getUrl())
+			$request->getUrl() ? Psr7UriFactory::fromNette($request->getUrl()) : NULL,
+			$request->getHeaders(),
+			'php://input'
 		);
 
 		// Nette-compatibility
