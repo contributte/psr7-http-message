@@ -45,14 +45,14 @@ Other libraries:
 - [stackphp](https://github.com/stackphp) - connect middleware pattern and symfony HttpKernel
 - [zendframework/zend-diactoros](https://github.com/zendframework/zend-diactoros/) - Zend PSR-7 middleware
 
-## Design
-
-@wireframe
-
 ## Overview
 
 - [Psr7Request](https://github.com/contributte/psr-7-http-message/blob/master/.docs/README.md#psr7request)
 - [Psr7Response](https://github.com/contributte/psr-7-http-message/blob/master/.docs/README.md#psr7response)
+
+-----
+
+The development is sponsored by [Tlapnet](http://www.tlapnet.cz). Thank you guys! :+1:
 
 -----
 
