@@ -2,7 +2,7 @@
 
 namespace Contributte\Psr7;
 
-use Nette\Http\Request;
+use Nette\Http\IRequest;
 use Nette\Http\RequestFactory;
 
 /**
@@ -22,10 +22,10 @@ class Psr7RequestFactory
 	}
 
 	/**
-	 * @param Request $request
+	 * @param IRequest $request
 	 * @return Psr7Request
 	 */
-	public static function fromNette(Request $request)
+	public static function fromNette(IRequest $request)
 	{
 		$psr7 = new Psr7Request(
 			$request->getMethod(),
@@ -33,7 +33,7 @@ class Psr7RequestFactory
 		);
 
 		// Nette-compatibility
-		$psr7->withHttpRequest($request);
+		$psr7 = $psr7->withHttpRequest($request);
 
 		return $psr7;
 	}

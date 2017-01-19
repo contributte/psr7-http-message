@@ -2,7 +2,7 @@
 
 namespace Contributte\Psr7;
 
-use Nette\Http\Response;
+use Nette\Http\IResponse;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
@@ -19,10 +19,10 @@ class Psr7ResponseFactory
 	}
 
 	/**
-	 * @param Response $response
+	 * @param IResponse $response
 	 * @return Psr7Response
 	 */
-	public static function fromNette(Response $response)
+	public static function fromNette(IResponse $response)
 	{
 		$psr7 = new Psr7Response();
 		$psr7 = $psr7->withHttpResponse($response);
