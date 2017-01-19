@@ -4,7 +4,7 @@ namespace Contributte\Psr7;
 
 use GuzzleHttp\Psr7\Request;
 use Nette\Application\Request as ApplicationRequest;
-use Nette\Http\Request as HttpRequest;
+use Nette\Http\IRequest as HttpRequest;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
