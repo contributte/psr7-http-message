@@ -41,6 +41,14 @@ class Psr7Response extends Response
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function hasHttpResponse()
+	{
+		return $this->httpResponse !== NULL;
+	}
+
+	/**
 	 * @return IApplicationResponse
 	 */
 	public function getApplicationResponse()
@@ -58,6 +66,14 @@ class Psr7Response extends Response
 		$new->applicationResponse = $response;
 
 		return $new;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasApplicationResponse()
+	{
+		return $this->applicationResponse !== NULL;
 	}
 
 	/**
@@ -105,7 +121,6 @@ class Psr7Response extends Response
 		}
 
 		if (!$this->applicationResponse) {
-			// @todo use stream instead
 			throw new InvalidStateException('Cannot send response without Nette\Http\Response');
 		}
 
