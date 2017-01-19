@@ -16,7 +16,14 @@ class Psr7UriFactory
 	 */
 	public static function fromNette(UrlScript $url)
 	{
-		$psr7 = new Psr7Uri((string) $url);
+		$uri = (string) $url;
+
+		if ($uri === 'http:///' && PHP_SAPI === 'cli') {
+			$psr7 = new Psr7Uri();
+		} else {
+			$psr7 = new Psr7Uri($uri);
+		}
+
 		$psr7 = $psr7->withUrlScript($url);
 
 		return $psr7;
