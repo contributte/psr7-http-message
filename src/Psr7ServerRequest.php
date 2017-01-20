@@ -10,4 +10,6 @@ use GuzzleHttp\Psr7\ServerRequest;
 class Psr7ServerRequest extends ServerRequest
 {
 
+	use NetteRequestTrait;
+
 }
