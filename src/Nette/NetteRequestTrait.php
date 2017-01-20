@@ -1,6 +1,6 @@
 <?php
 
-namespace Contributte\Psr7;
+namespace Contributte\Psr7\Nette;
 
 use Nette\Application\Request as ApplicationRequest;
 use Nette\Http\IRequest as HttpRequest;

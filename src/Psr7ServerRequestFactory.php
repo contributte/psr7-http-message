@@ -2,8 +2,10 @@
 
 namespace Contributte\Psr7;
 
+use GuzzleHttp\Psr7\LazyOpenStream;
 use Nette\Http\IRequest;
 use Nette\Http\RequestFactory;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
@@ -12,26 +14,11 @@ class Psr7ServerRequestFactory
 {
 
 	/**
-	 * @return Psr7ServerRequest
+	 * @return Psr7ServerRequest|ServerRequestInterface
 	 */
 	public static function fromSuperGlobal()
 	{
-		$method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : NULL;
-		if ($method === 'POST' && isset($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'])
-			&& preg_match('#^[A-Z]+\z#', $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'])
-		) {
-			$method = $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'];
-		}
-
-		$url = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
-
-		return new Psr7ServerRequest(
-			$method,
-			$url,
-			$_SERVER,
-			'php://input',
-			$_SERVER
-		);
+		return Psr7ServerRequest::fromGlobals();
 	}
 
 	/**
@@ -54,7 +41,8 @@ class Psr7ServerRequestFactory
 			$request->getMethod(),
 			$request->getUrl() ? Psr7UriFactory::fromNette($request->getUrl()) : NULL,
 			$request->getHeaders(),
-			'php://input',
+			new LazyOpenStream('php://input', 'r+'),
+			str_replace('HTTP/', '', $request->getHeader('SERVER_PROTOCOL', '1.1')),
 			$_SERVER
 		);
 
