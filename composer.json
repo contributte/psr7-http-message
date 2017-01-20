@@ -24,8 +24,8 @@
   },
   "suggest": {
     "nette/di": "to use Psr7HttpExtension[CompilerExtension]",
-    "nette/http": "to use $request->withHttpRequest[Nette\\Http\\Request], to use Psr7RequestFactory, to use Psr7ServerRequestFactory",
-    "nette/application": "to use $request->withApplicationRequest[Nette\\Application\\Request]"
+    "nette/application": "to use $request->withApplicationRequest[Nette\\Application\\Request]",
+    "nette/http": "to use $request->withHttpRequest[Nette\\Http\\Request], to use Psr7RequestFactory, to use Psr7ServerRequestFactory"
   },
   "autoload": {
     "psr-4": {
