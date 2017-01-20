@@ -121,7 +121,7 @@ class Psr7Response extends Response
 		}
 
 		if (!$this->applicationResponse) {
-			throw new InvalidStateException('Cannot send response without Nette\Http\Response');
+			throw new InvalidStateException('Cannot send response without Nette\Application\Application');
 		}
 
 		$this->applicationResponse->send((new RequestFactory())->createHttpRequest(), $this->httpResponse);
