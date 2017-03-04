@@ -47,8 +47,8 @@ Other libraries:
 
 ## Overview
 
-- [Psr7Request](https://github.com/contributte/psr-7-http-message/blob/master/.docs/README.md#psr7request)
-- [Psr7Response](https://github.com/contributte/psr-7-http-message/blob/master/.docs/README.md#psr7response)
+- [Psr7Request](https://github.com/contributte/psr7-http-message/tree/master/.docs#psr7request)
+- [Psr7Response](https://github.com/contributte/psr7-http-message/tree/master/.docs#psr7response)
 
 -----
 
