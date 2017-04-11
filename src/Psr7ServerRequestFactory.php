@@ -46,6 +46,11 @@ class Psr7ServerRequestFactory
 			$_SERVER
 		);
 
+		$psr7 = $psr7->withCookieParams($request->getCookies())
+			->withQueryParams($request->getQuery())
+			->withParsedBody($request->getPost())
+			->withUploadedFiles(Psr7ServerRequest::normalizeFiles($request->getFiles()));
+
 		// Nette-compatibility
 		$psr7 = $psr7->withHttpRequest($request);
 
