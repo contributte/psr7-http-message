@@ -1,5 +1,5 @@
 {
-  "name": "contributte/psr-7",
+  "name": "contributte/psr7-http-message",
   "description": "PSR-7 (HTTP Message Interface) to Nette Framework",
   "keywords": ["nette", "psr7", "http", "message", "request", "response"],
   "type": "library",
