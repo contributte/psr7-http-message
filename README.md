@@ -21,7 +21,7 @@
 ## Install
 
 ```
-composer require contributte/psr-7
+composer require contributte/psr7-http-message
 ```
 
 ## Versions
