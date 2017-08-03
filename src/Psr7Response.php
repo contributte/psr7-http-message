@@ -2,11 +2,11 @@
 
 namespace Contributte\Psr7;
 
+use Contributte\Psr7\Nette\NetteResponseTrait;
 use GuzzleHttp\Psr7\Response;
-use Nette\Application\IResponse as IApplicationResponse;
-use Nette\Http\IResponse as IHttpResponse;
 use Nette\Http\RequestFactory;
 use Nette\InvalidStateException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
@@ -14,67 +14,63 @@ use Nette\InvalidStateException;
 class Psr7Response extends Response
 {
 
-	/** @var IHttpResponse */
-	protected $httpResponse;
-
-	/** @var IApplicationResponse */
-	protected $applicationResponse;
+	use NetteResponseTrait;
 
 	/**
-	 * @return IHttpResponse
-	 */
-	public function getHttpResponse()
-	{
-		return $this->httpResponse;
-	}
-
-	/**
-	 * @param IHttpResponse $response
+	 * @param mixed $body
 	 * @return static
 	 */
-	public function withHttpResponse(IHttpResponse $response)
+	public function appendBody($body)
 	{
-		$new = clone $this;
-		$new->httpResponse = $response;
+		$this->getBody()->write($body);
 
-		return $new;
+		return $this;
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function hasHttpResponse()
-	{
-		return $this->httpResponse !== NULL;
-	}
-
-	/**
-	 * @return IApplicationResponse
-	 */
-	public function getApplicationResponse()
-	{
-		return $this->applicationResponse;
-	}
-
-	/**
-	 * @param IApplicationResponse $response
+	 * @param mixed $body
 	 * @return static
 	 */
-	public function withApplicationResponse(IApplicationResponse $response)
+	public function setBody($body)
 	{
-		$new = clone $this;
-		$new->applicationResponse = $response;
+		$this->clearBody();
+		$this->getBody()->write($body);
 
-		return $new;
+		return $this;
 	}
 
 	/**
-	 * @return bool
+	 * @return static
 	 */
-	public function hasApplicationResponse()
+	public function clearBody()
 	{
-		return $this->applicationResponse !== NULL;
+		$this->getBody()->rewind();
+
+		return $this;
 	}
+
+	/**
+	 * @param mixed $body
+	 * @return static
+	 */
+	public function writeBody($body)
+	{
+		$this->getBody()->write($body);
+
+		return $this;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getContents()
+	{
+		return $this->getBody()->getContents();
+	}
+
+	/**
+	 * FINALIZE ****************************************************************
+	 */
 
 	/**
 	 * Send whole response
@@ -125,6 +121,25 @@ class Psr7Response extends Response
 		}
 
 		$this->applicationResponse->send((new RequestFactory())->createHttpRequest(), $this->httpResponse);
+	}
+
+	/**
+	 * FACTORY *****************************************************************
+	 */
+
+	/**
+	 * @param ResponseInterface $response
+	 * @return static
+	 */
+	public static function of(ResponseInterface $response)
+	{
+		return new static(
+			$response->getStatusCode(),
+			$response->getHeaders(),
+			$response->getBody(),
+			$response->getProtocolVersion(),
+			$response->getReasonPhrase()
+		);
 	}
 
 }
