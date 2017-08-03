@@ -5,7 +5,6 @@ namespace Contributte\Psr7;
 use GuzzleHttp\Psr7\LazyOpenStream;
 use Nette\Http\IRequest;
 use Nette\Http\RequestFactory;
-use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
@@ -14,7 +13,7 @@ class Psr7ServerRequestFactory
 {
 
 	/**
-	 * @return Psr7ServerRequest|ServerRequestInterface
+	 * @return Psr7ServerRequest
 	 */
 	public static function fromSuperGlobal()
 	{

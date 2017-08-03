@@ -12,14 +12,16 @@ use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
 
+// Uri
 test(function () {
 	$nette = new Request(
 		new UrlScript('https://nette.org')
 	);
 	$request = Psr7ServerRequestFactory::fromNette($nette);
-	Assert::equal('https://nette.org/', (string) $request->getUri());
+	Assert::equal('https://nette.org/', $request->getUri()->__toString());
 });
 
+// ParsedBody
 test(function () {
 	$nette = new Request(
 		new UrlScript('https://nette.org'),
@@ -30,7 +32,21 @@ test(function () {
 	Assert::equal(['foo' => 'bar'], $request->getParsedBody());
 });
 
+// Global
+test(function () {
+	$_SERVER['REQUEST_METHOD'] = 'POST';
+	$request = Psr7ServerRequestFactory::fromGlobal();
+	Assert::equal('POST', $request->getMethod());
+});
 
+// SuperGlobal
+test(function () {
+	$_SERVER['REQUEST_METHOD'] = 'POST';
+	$request = Psr7ServerRequestFactory::fromSuperGlobal();
+	Assert::equal('POST', $request->getMethod());
+});
+
+// FileUpload
 test(function () {
 	file_put_contents(TMP_DIR . '/fake.txt', 'foobar');
 	$nette = new Request(
