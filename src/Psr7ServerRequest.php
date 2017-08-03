@@ -91,7 +91,7 @@ class Psr7ServerRequest extends ServerRequest
 	}
 
 	/**
-	 * @return Psr7ServerRequest
+	 * @return static
 	 */
 	public static function fromGlobals()
 	{
