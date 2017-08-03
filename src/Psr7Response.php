@@ -10,6 +10,8 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
+ *
+ * @method self withHeader($header, $value)
  */
 class Psr7Response extends Response
 {
@@ -66,6 +68,24 @@ class Psr7Response extends Response
 	public function getContents()
 	{
 		return $this->getBody()->getContents();
+	}
+
+	/**
+	 * HEADERS ****************************************************************
+	 */
+
+	/**
+	 * @param array $headers
+	 * @return static
+	 */
+	public function withHeaders(array $headers)
+	{
+		$new = clone $this;
+		foreach ($headers as $key => $value) {
+			$new = $new->withHeader($key, $value);
+		}
+
+		return $new;
 	}
 
 	/**
