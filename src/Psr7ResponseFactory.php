@@ -25,7 +25,10 @@ class Psr7ResponseFactory
 	public static function fromNette(IResponse $response)
 	{
 		$psr7 = new Psr7Response();
-		$psr7 = $psr7->withHttpResponse($response);
+		$psr7 = $psr7
+			->withStatus($response->getCode())
+			->withHeaders($response->getHeaders())
+			->withHttpResponse($response);
 
 		return $psr7;
 	}
