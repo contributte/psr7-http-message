@@ -2,8 +2,8 @@
 
 namespace Contributte\Psr7;
 
-use Contributte\Psr7\Exception\Logical\InvalidStateException;
 use Contributte\Psr7\Nette\NetteRequestTrait;
+use GuzzleHttp\Psr7\LazyOpenStream;
 use GuzzleHttp\Psr7\ServerRequest;
 use InvalidArgumentException;
 use Nette\Http\FileUpload;
@@ -19,6 +19,7 @@ class Psr7ServerRequest extends ServerRequest
 {
 
 	use NetteRequestTrait;
+	use ExtraRequestTrait;
 
 	/**
 	 * @param array $files
@@ -43,55 +44,6 @@ class Psr7ServerRequest extends ServerRequest
 		}
 
 		return $normalized;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getContents()
-	{
-		return $this->getBody()->getContents();
-	}
-
-	/**
-	 * @param bool $assoc
-	 * @return mixed
-	 */
-	public function getJsonBody($assoc = TRUE)
-	{
-		return json_decode($this->getContents(), $assoc);
-	}
-
-	/**
-	 * QUERY PARAM *************************************************************
-	 */
-
-	/**
-	 * @param string $name
-	 *
-	 * @return bool
-	 */
-	public function hasQueryParam($name)
-	{
-		return array_key_exists($name, $this->getQueryParams());
-	}
-
-	/**
-	 * @param string $name
-	 * @param mixed $default
-	 * @return mixed
-	 */
-	public function getQueryParam($name, $default = NULL)
-	{
-		if (!$this->hasQueryParam($name)) {
-			if (func_num_args() < 2) {
-				throw new InvalidStateException(sprintf('No query parameter "%s" found', $name));
-			}
-
-			return $default;
-		}
-
-		return $this->getQueryParams()[$name];
 	}
 
 	/**
@@ -136,6 +88,26 @@ class Psr7ServerRequest extends ServerRequest
 			->withRequestTarget($request->getRequestTarget())
 			->withUploadedFiles($request->getUploadedFiles())
 			->withQueryParams($request->getQueryParams());
+	}
+
+	/**
+	 * @return Psr7ServerRequest
+	 */
+	public static function fromGlobals()
+	{
+		$method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
+		$headers = function_exists('getallheaders') ? getallheaders() : [];
+		$uri = self::getUriFromGlobals();
+		$body = new LazyOpenStream('php://input', 'r+');
+		$protocol = isset($_SERVER['SERVER_PROTOCOL']) ? str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1';
+
+		$serverRequest = new static($method, $uri, $headers, $body, $protocol, $_SERVER);
+
+		return $serverRequest
+			->withCookieParams($_COOKIE)
+			->withQueryParams($_GET)
+			->withParsedBody($_POST)
+			->withUploadedFiles(self::normalizeFiles($_FILES));
 	}
 
 }

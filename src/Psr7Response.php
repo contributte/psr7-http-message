@@ -142,4 +142,12 @@ class Psr7Response extends Response
 		);
 	}
 
+	/**
+	 * @return static
+	 */
+	public static function fromGlobals()
+	{
+		return new static();
+	}
+
 }
