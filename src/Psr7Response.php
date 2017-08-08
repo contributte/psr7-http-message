@@ -53,6 +53,16 @@ class Psr7Response extends Response
 	}
 
 	/**
+	 * @param array $data
+	 * @return static
+	 */
+	public function writeJsonBody(array $data)
+	{
+		return $this->withHeader('Content-Type', 'application/json')
+			->writeBody(json_encode($data), TRUE);
+	}
+
+	/**
 	 * @param bool $rewind
 	 * @return mixed
 	 */
