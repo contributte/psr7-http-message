@@ -30,18 +30,6 @@ class Psr7Response extends Response
 	}
 
 	/**
-	 * @param mixed $body
-	 * @return static
-	 */
-	public function setBody($body)
-	{
-		$this->rewindBody();
-		$this->writeBody($body);
-
-		return $this;
-	}
-
-	/**
 	 * @return static
 	 */
 	public function rewindBody()
@@ -53,10 +41,12 @@ class Psr7Response extends Response
 
 	/**
 	 * @param mixed $body
+	 * @param bool $clear
 	 * @return static
 	 */
-	public function writeBody($body)
+	public function writeBody($body, $clear = FALSE)
 	{
+		if ($clear) $this->rewindBody();
 		$this->getBody()->write($body);
 
 		return $this;
