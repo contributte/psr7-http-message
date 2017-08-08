@@ -2,10 +2,10 @@
 
 namespace Contributte\Psr7;
 
+use Contributte\Psr7\Exception\Logical\InvalidStateException;
 use Contributte\Psr7\Nette\NetteResponseTrait;
 use GuzzleHttp\Psr7\Response;
 use Nette\Http\RequestFactory;
-use Nette\InvalidStateException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -41,12 +41,10 @@ class Psr7Response extends Response
 
 	/**
 	 * @param mixed $body
-	 * @param bool $clear
 	 * @return static
 	 */
-	public function writeBody($body, $clear = FALSE)
+	public function writeBody($body)
 	{
-		if ($clear) $this->rewindBody();
 		$this->getBody()->write($body);
 
 		return $this;
@@ -59,7 +57,16 @@ class Psr7Response extends Response
 	public function writeJsonBody(array $data)
 	{
 		return $this->withHeader('Content-Type', 'application/json')
-			->writeBody(json_encode($data), TRUE);
+			->writeBody(json_encode($data));
+	}
+
+	/**
+	 * @param bool $assoc
+	 * @return mixed
+	 */
+	public function getJsonBody($assoc = TRUE)
+	{
+		return json_decode($this->getContents(), $assoc);
 	}
 
 	/**

@@ -22,3 +22,24 @@ test(function () {
 
 	Assert::equal('PUT', $clone->getMethod());
 });
+
+// withAttributes
+test(function () {
+	$request = Psr7ServerRequestFactory::fromGlobal()
+		->withAttributes(['X-Foo' => 'bar', 'X-Bar' => 'baz']);
+
+	Assert::equal('GET', $request->getMethod());
+	Assert::equal('bar', $request->getAttribute('X-Foo'));
+	Assert::equal('baz', $request->getAttribute('X-Bar'));
+});
+
+// hasQueryParam
+test(function () {
+	$_GET['FOO'] = 'bar';
+	$request = Psr7ServerRequestFactory::fromSuperGlobal();
+
+	Assert::true($request->hasQueryParam('FOO'));
+	Assert::false($request->hasQueryParam('BAR'));
+	Assert::equal('bar', $request->getQueryParam('FOO'));
+	Assert::equal('baz', $request->getQueryParam('BAR', 'baz'));
+});

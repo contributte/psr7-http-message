@@ -2,7 +2,7 @@
 
 namespace Contributte\Psr7\Exception\Logical;
 
-use Contributte\Api\Exception\LogicalException;
+use Contributte\Psr7\Exception\LogicalException;
 
 final class InvalidStateException extends LogicalException
 {
