@@ -2,18 +2,22 @@
 
 namespace Contributte\Psr7;
 
+use Contributte\Psr7\Extra\ExtraRequestTrait;
 use Contributte\Psr7\Nette\NetteRequestTrait;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
+ *
+ * @method self|static withAttribute($name, $value)
+ * @method self|static withHeader($header, $value)
  */
 class Psr7Request extends Request
 {
 
-	use NetteRequestTrait;
 	use ExtraRequestTrait;
+	use NetteRequestTrait;
 
 	/**
 	 * FACTORY *****************************************************************

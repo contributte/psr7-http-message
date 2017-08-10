@@ -6,6 +6,9 @@
 
 use Contributte\Psr7\Psr7Request;
 use Contributte\Psr7\Psr7RequestFactory;
+use Contributte\Psr7\Psr7Uri;
+use Nette\Application\Request as ApplicationRequest;
+use Nette\Http\RequestFactory;
 use Tester\Assert;
 use function GuzzleHttp\Psr7\stream_for;
 
@@ -40,4 +43,27 @@ test(function () {
 	Assert::equal(['foo' => 'bar'], $request->getJsonBody());
 	$request->getBody()->rewind();
 	Assert::equal((object) ['foo' => 'bar'], $request->getJsonBody(FALSE));
+});
+
+// withNewUri
+test(function () {
+	$request1 = Psr7RequestFactory::fromGlobal()
+		->withUri(new Psr7Uri('https://contributte.org'));
+
+	$request2 = Psr7RequestFactory::fromGlobal()
+		->withNewUri('https://contributte.org');
+
+	Assert::equal($request1->getUri(), $request2->getUri());
+});
+
+// withHttpRequest
+test(function () {
+	$httpRequest = (new RequestFactory())->createHttpRequest();
+
+	$request = Psr7RequestFactory::fromGlobal()
+		->withHttpRequest($httpRequest)
+		->withApplicationRequest(new ApplicationRequest('Foo'));
+
+	Assert::same($httpRequest, $request->getHttpRequest());
+	Assert::equal('Foo', $request->getApplicationRequest()->getPresenterName());
 });
