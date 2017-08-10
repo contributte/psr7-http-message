@@ -3,6 +3,7 @@
 namespace Contributte\Psr7;
 
 use Contributte\Psr7\Exception\Logical\InvalidStateException;
+use Contributte\Psr7\Extra\ExtraResponseTrait;
 use Contributte\Psr7\Nette\NetteResponseTrait;
 use GuzzleHttp\Psr7\Response;
 use Nette\Http\RequestFactory;
@@ -11,92 +12,13 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  *
- * @method self withHeader($header, $value)
+ * @method static withHeader($header, $value)
  */
 class Psr7Response extends Response
 {
 
+	use ExtraResponseTrait;
 	use NetteResponseTrait;
-
-	/**
-	 * @param mixed $body
-	 * @return static
-	 */
-	public function appendBody($body)
-	{
-		$this->getBody()->write($body);
-
-		return $this;
-	}
-
-	/**
-	 * @return static
-	 */
-	public function rewindBody()
-	{
-		$this->getBody()->rewind();
-
-		return $this;
-	}
-
-	/**
-	 * @param mixed $body
-	 * @return static
-	 */
-	public function writeBody($body)
-	{
-		$this->getBody()->write($body);
-
-		return $this;
-	}
-
-	/**
-	 * @param array $data
-	 * @return static
-	 */
-	public function writeJsonBody(array $data)
-	{
-		return $this->withHeader('Content-Type', 'application/json')
-			->writeBody(json_encode($data));
-	}
-
-	/**
-	 * @param bool $assoc
-	 * @return mixed
-	 */
-	public function getJsonBody($assoc = TRUE)
-	{
-		return json_decode($this->getContents(), $assoc);
-	}
-
-	/**
-	 * @param bool $rewind
-	 * @return mixed
-	 */
-	public function getContents($rewind = TRUE)
-	{
-		if ($rewind === TRUE) $this->rewindBody();
-
-		return $this->getBody()->getContents();
-	}
-
-	/**
-	 * HEADERS ****************************************************************
-	 */
-
-	/**
-	 * @param array $headers
-	 * @return static
-	 */
-	public function withHeaders(array $headers)
-	{
-		$new = clone $this;
-		foreach ($headers as $key => $value) {
-			$new = $new->withHeader($key, $value);
-		}
-
-		return $new;
-	}
 
 	/**
 	 * FINALIZE ****************************************************************

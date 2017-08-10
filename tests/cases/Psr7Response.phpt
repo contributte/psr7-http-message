@@ -96,6 +96,11 @@ test(function () {
 	}, InvalidStateException::class, 'Cannot send response without Nette\Http\Response');
 
 	Assert::throws(function () {
+		$response = Psr7Response::fromGlobals();
+		$response->sendBody();
+	}, InvalidStateException::class, 'Cannot send response without Nette\Http\Response');
+
+	Assert::throws(function () {
 		$response = Psr7Response::fromGlobals()
 			->withHttpResponse(new Response());
 
@@ -106,9 +111,10 @@ test(function () {
 	}, InvalidStateException::class, 'Cannot send response without Nette\Application\Application');
 });
 
-// Send
+// send
 test(function () {
 	$response = Psr7Response::fromGlobals()
+		->withHeaders(['X-Foo' => 'Bar'])
 		->withHttpResponse(new Response())
 		->withApplicationResponse(new TextResponse('FOOBAR'));
 
