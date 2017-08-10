@@ -4,6 +4,7 @@
  * Test: Psr7ServerRequest
  */
 
+use Contributte\Psr7\Exception\Logical\InvalidStateException;
 use Contributte\Psr7\Psr7ServerRequest;
 use Contributte\Psr7\Psr7ServerRequestFactory;
 use Tester\Assert;
@@ -33,13 +34,23 @@ test(function () {
 	Assert::equal('baz', $request->getAttribute('X-Bar'));
 });
 
-// hasQueryParam
+// normalizeNetteFiles
 test(function () {
-	$_GET['FOO'] = 'bar';
+	Assert::throws(function () {
+		Psr7ServerRequest::normalizeNetteFiles([new stdClass()]);
+	}, InvalidArgumentException::class, 'Invalid value in files specification');
+});
+
+// QueryParams
+test(function () {
+	$_GET['foo'] = 'bar';
 	$request = Psr7ServerRequestFactory::fromSuperGlobal();
 
-	Assert::true($request->hasQueryParam('FOO'));
-	Assert::false($request->hasQueryParam('BAR'));
-	Assert::equal('bar', $request->getQueryParam('FOO'));
-	Assert::equal('baz', $request->getQueryParam('BAR', 'baz'));
+	Assert::true($request->hasQueryParam('foo'));
+	Assert::equal('bar', $request->getQueryParam('foo'));
+	Assert::equal('baz', $request->getQueryParam('foobar', 'baz'));
+
+	Assert::throws(function () use ($request) {
+		$request->getQueryParam('baz');
+	}, InvalidStateException::class, 'No query parameter "baz" found');
 });

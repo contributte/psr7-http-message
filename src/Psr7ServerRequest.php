@@ -2,6 +2,7 @@
 
 namespace Contributte\Psr7;
 
+use Contributte\Psr7\Extra\ExtraServerRequestTrait;
 use Contributte\Psr7\Nette\NetteRequestTrait;
 use GuzzleHttp\Psr7\LazyOpenStream;
 use GuzzleHttp\Psr7\ServerRequest;
@@ -13,13 +14,14 @@ use Psr\Http\Message\ServerRequestInterface;
  * @author Milan Felix Sulc <sulcmil@gmail.com>
  *
  * @method Psr7UploadedFile[] getUploadedFiles()
- * @method self withAttribute($name, $value)
+ * @method self|static withAttribute($name, $value)
+ * @method self|static withHeader($header, $value)
  */
 class Psr7ServerRequest extends ServerRequest
 {
 
 	use NetteRequestTrait;
-	use ExtraRequestTrait;
+	use ExtraServerRequestTrait;
 
 	/**
 	 * @param array $files
