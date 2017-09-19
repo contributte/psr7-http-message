@@ -32,6 +32,26 @@ test(function () {
 	Assert::equal(['foo' => 'bar'], $request->getParsedBody());
 });
 
+// RawBody
+test(function () {
+	$nette = new Request(
+		new UrlScript('https://nette.org'),
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		NULL,
+		function () {
+			return '{"foo":"bar"}';
+		}
+	);
+	$request = Psr7ServerRequestFactory::fromNette($nette);
+	Assert::same('{"foo":"bar"}', (string) $request->getBody());
+});
+
 // Global
 test(function () {
 	$_SERVER['REQUEST_METHOD'] = 'POST';

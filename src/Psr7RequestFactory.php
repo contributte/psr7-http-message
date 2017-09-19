@@ -2,9 +2,9 @@
 
 namespace Contributte\Psr7;
 
-use GuzzleHttp\Psr7\LazyOpenStream;
 use Nette\Http\IRequest;
 use Nette\Http\RequestFactory;
+use function GuzzleHttp\Psr7\stream_for;
 
 /**
  * @author Milan Felix Sulc <sulcmil@gmail.com>
@@ -32,7 +32,7 @@ class Psr7RequestFactory
 			$request->getMethod(),
 			$request->getUrl() ? Psr7UriFactory::fromNette($request->getUrl()) : NULL,
 			$request->getHeaders(),
-			new LazyOpenStream('php://input', 'r+'),
+			stream_for($request->getRawBody()),
 			str_replace('HTTP/', '', $request->getHeader('SERVER_PROTOCOL', '1.1'))
 		);
 
