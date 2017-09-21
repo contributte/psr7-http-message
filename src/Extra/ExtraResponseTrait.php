@@ -49,8 +49,9 @@ trait ExtraResponseTrait
 	 */
 	public function writeJsonBody(array $data)
 	{
-		return $this->withHeader('Content-Type', 'application/json')
-			->writeBody(json_encode($data));
+		return $this
+			->writeBody(json_encode($data))
+			->withHeader('Content-Type', 'application/json');
 	}
 
 	/**
