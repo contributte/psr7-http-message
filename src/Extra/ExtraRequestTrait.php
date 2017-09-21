@@ -18,6 +18,14 @@ trait ExtraRequestTrait
 	/**
 	 * @return mixed
 	 */
+	public function getBodyClone()
+	{
+		return clone $this->getBody();
+	}
+
+	/**
+	 * @return mixed
+	 */
 	public function getContents()
 	{
 		return $this->getBody()->getContents();
@@ -29,7 +37,7 @@ trait ExtraRequestTrait
 	 */
 	public function getJsonBody($assoc = TRUE)
 	{
-		return json_decode($this->getContents(), $assoc);
+		return json_decode((string) $this->getBody(), $assoc);
 	}
 
 	/**
