@@ -3,7 +3,6 @@
 namespace Contributte\Psr7;
 
 use Contributte\Psr7\Extra\ExtraResponseTrait;
-use Contributte\Psr7\Nette\NetteResponseTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -13,7 +12,6 @@ use Psr\Http\Message\StreamInterface;
 class ResponseWrapper implements ResponseInterface
 {
 
-	use NetteResponseTrait;
 	use ExtraResponseTrait;
 
 	/** @var ResponseInterface */
