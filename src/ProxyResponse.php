@@ -9,7 +9,7 @@ use Psr\Http\Message\StreamInterface;
 /**
  * Tiny wrapper for PSR-7 ResponseInterface
  */
-class ResponseWrapper implements ResponseInterface
+class ProxyResponse implements ResponseInterface
 {
 
 	use ExtraResponseTrait;

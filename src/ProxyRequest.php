@@ -10,7 +10,7 @@ use Psr\Http\Message\UriInterface;
 /**
  * Tiny wrapper for PSR-7 ServerRequestInterface
  */
-class RequestWrapper implements ServerRequestInterface
+class ProxyRequest implements ServerRequestInterface
 {
 
 	use ExtraRequestTrait;
