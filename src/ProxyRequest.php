@@ -3,6 +3,7 @@
 namespace Contributte\Psr7;
 
 use Contributte\Psr7\Extra\ExtraRequestTrait;
+use Contributte\Psr7\Extra\ExtraServerRequestTrait;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -14,6 +15,7 @@ class ProxyRequest implements ServerRequestInterface
 {
 
 	use ExtraRequestTrait;
+	use ExtraServerRequestTrait;
 
 	/** @var ServerRequestInterface */
 	protected $inner;
