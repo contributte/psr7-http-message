@@ -4,6 +4,7 @@ namespace Contributte\Psr7\Tests\Helpers;
 
 class JsonObject implements \JsonSerializable
 {
+
 	/** @var string */
 	private $foo;
 
@@ -25,6 +26,7 @@ class JsonObject implements \JsonSerializable
 	 */
 	public function jsonSerialize()
 	{
-		return ["foo" => $this->foo];
+		return ['foo' => $this->foo];
 	}
+
 }
