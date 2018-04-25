@@ -7,6 +7,7 @@
 use Contributte\Psr7\Exception\Logical\InvalidStateException;
 use Contributte\Psr7\Psr7Response;
 use Contributte\Psr7\Psr7ResponseFactory;
+use Contributte\Psr7\Tests\Helpers\JsonObject;
 use Nette\Application\IResponse as IApplicationResponse;
 use Nette\Application\Responses\TextResponse;
 use Nette\Http\IResponse;
@@ -52,6 +53,14 @@ test(function () {
 	$response = Psr7ResponseFactory::fromGlobal();
 
 	$response = $response->writeJsonBody(['foo' => 'bar']);
+	Assert::equal(['foo' => 'bar'], $response->getJsonBody());
+});
+
+// writeJsonObject
+test(function () {
+	$response = Psr7ResponseFactory::fromGlobal();
+	$jsonObject = new JsonObject('bar');
+	$response = $response->writeJsonObject($jsonObject);
 	Assert::equal(['foo' => 'bar'], $response->getJsonBody());
 });
 

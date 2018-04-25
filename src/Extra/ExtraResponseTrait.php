@@ -55,6 +55,17 @@ trait ExtraResponseTrait
 	}
 
 	/**
+	 * @param \JsonSerializable $object
+	 * @return static|Psr7Response
+	 */
+	public function writeJsonObject(\JsonSerializable $object)
+	{
+		return $this
+			->writeBody(json_encode($object))
+			->withHeader('Content-Type', 'application/json');
+	}
+
+	/**
 	 * @param bool $assoc
 	 * @return mixed
 	 */
