@@ -34,7 +34,6 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Contributte\\Psr7\\Tests\\": "tests"
     }
   },
   "scripts": {
