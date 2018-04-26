@@ -1,8 +1,10 @@
 <?php
 
-namespace Contributte\Psr7\Tests\Fixtures;
+namespace Tests\Fixtures;
 
-class JsonObject implements \JsonSerializable
+use JsonSerializable;
+
+class JsonObject implements JsonSerializable
 {
 
 	/** @var string */
