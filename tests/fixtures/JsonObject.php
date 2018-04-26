@@ -1,6 +1,6 @@
 <?php
 
-namespace Contributte\Psr7\Tests\Helpers;
+namespace Contributte\Psr7\Tests\Fixtures;
 
 class JsonObject implements \JsonSerializable
 {

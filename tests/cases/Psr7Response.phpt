@@ -7,7 +7,7 @@
 use Contributte\Psr7\Exception\Logical\InvalidStateException;
 use Contributte\Psr7\Psr7Response;
 use Contributte\Psr7\Psr7ResponseFactory;
-use Contributte\Psr7\Tests\Helpers\JsonObject;
+use Contributte\Psr7\Tests\Fixtures\JsonObject;
 use Nette\Application\IResponse as IApplicationResponse;
 use Nette\Application\Responses\TextResponse;
 use Nette\Http\IResponse;
@@ -15,7 +15,6 @@ use Nette\Http\Response;
 use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
-require_once __DIR__ . '/../helpers/JsonObject.php';
 
 // getBody
 test(function () {
