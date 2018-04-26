@@ -12,6 +12,7 @@ use Nette\Application\Responses\TextResponse;
 use Nette\Http\IResponse;
 use Nette\Http\Response;
 use Tester\Assert;
+use Tests\Fixtures\JsonObject;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -52,6 +53,14 @@ test(function () {
 	$response = Psr7ResponseFactory::fromGlobal();
 
 	$response = $response->writeJsonBody(['foo' => 'bar']);
+	Assert::equal(['foo' => 'bar'], $response->getJsonBody());
+});
+
+// writeJsonObject
+test(function () {
+	$response = Psr7ResponseFactory::fromGlobal();
+	$jsonObject = new JsonObject('bar');
+	$response = $response->writeJsonObject($jsonObject);
 	Assert::equal(['foo' => 'bar'], $response->getJsonBody());
 });
 

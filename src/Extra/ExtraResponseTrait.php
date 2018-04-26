@@ -4,6 +4,7 @@ namespace Contributte\Psr7\Extra;
 
 use Contributte\Psr7\Psr7Response;
 use Contributte\Psr7\Psr7Stream;
+use JsonSerializable;
 
 /**
  * @method Psr7Stream getBody()
@@ -51,6 +52,17 @@ trait ExtraResponseTrait
 	{
 		return $this
 			->writeBody(json_encode($data))
+			->withHeader('Content-Type', 'application/json');
+	}
+
+	/**
+	 * @param JsonSerializable $object
+	 * @return static|Psr7Response
+	 */
+	public function writeJsonObject(JsonSerializable $object)
+	{
+		return $this
+			->writeBody(json_encode($object))
 			->withHeader('Content-Type', 'application/json');
 	}
 
