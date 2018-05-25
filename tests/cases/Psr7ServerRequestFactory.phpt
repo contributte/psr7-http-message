@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Test: Psr7ServerRequestFactory
@@ -13,7 +13,7 @@ use Tester\Assert;
 require_once __DIR__ . '/../bootstrap.php';
 
 // Uri
-test(function () {
+test(function (): void {
 	$nette = new Request(
 		new UrlScript('https://nette.org')
 	);
@@ -22,10 +22,10 @@ test(function () {
 });
 
 // ParsedBody
-test(function () {
+test(function (): void {
 	$nette = new Request(
 		new UrlScript('https://nette.org'),
-		NULL,
+		null,
 		['foo' => 'bar']
 	);
 	$request = Psr7ServerRequestFactory::fromNette($nette);
@@ -33,17 +33,17 @@ test(function () {
 });
 
 // RawBody
-test(function () {
+test(function (): void {
 	$nette = new Request(
 		new UrlScript('https://nette.org'),
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		NULL,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
 		function () {
 			return '{"foo":"bar"}';
 		}
@@ -53,26 +53,26 @@ test(function () {
 });
 
 // Global
-test(function () {
+test(function (): void {
 	$_SERVER['REQUEST_METHOD'] = 'POST';
 	$request = Psr7ServerRequestFactory::fromGlobal();
 	Assert::equal('POST', $request->getMethod());
 });
 
 // SuperGlobal
-test(function () {
+test(function (): void {
 	$_SERVER['REQUEST_METHOD'] = 'POST';
 	$request = Psr7ServerRequestFactory::fromSuperGlobal();
 	Assert::equal('POST', $request->getMethod());
 });
 
 // FileUpload
-test(function () {
+test(function (): void {
 	file_put_contents(TMP_DIR . '/fake.txt', 'foobar');
 	$nette = new Request(
 		new UrlScript('https://nette.org'),
-		NULL,
-		NULL,
+		null,
+		null,
 		[new FileUpload(['name' => 'fake.txt', 'type' => 'foo', 'size' => 10, 'tmp_name' => TMP_DIR . '/fake.txt', 'error' => 0])]
 	);
 	$request = Psr7ServerRequestFactory::fromNette($nette);

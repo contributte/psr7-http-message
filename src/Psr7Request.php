@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7;
 
@@ -8,8 +8,6 @@ use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- *
  * @method self|static withAttribute($name, $value)
  * @method self|static withHeader($header, $value)
  */
@@ -23,11 +21,7 @@ class Psr7Request extends Request
 	 * FACTORY *****************************************************************
 	 */
 
-	/**
-	 * @param RequestInterface $request
-	 * @return static
-	 */
-	public static function of(RequestInterface $request)
+	public static function of(RequestInterface $request): self
 	{
 		$new = new static(
 			$request->getMethod(),

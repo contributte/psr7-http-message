@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Test: Psr7ServerRequest
@@ -12,7 +12,7 @@ use Tester\Assert;
 require_once __DIR__ . '/../bootstrap.php';
 
 // of
-test(function () {
+test(function (): void {
 	$request = Psr7ServerRequestFactory::fromGlobal()
 		->withHeader('X-Foo', 'bar')
 		->withMethod('PUT');
@@ -25,7 +25,7 @@ test(function () {
 });
 
 // withAttributes
-test(function () {
+test(function (): void {
 	$request = Psr7ServerRequestFactory::fromGlobal()
 		->withAttributes(['X-Foo' => 'bar', 'X-Bar' => 'baz']);
 
@@ -35,14 +35,14 @@ test(function () {
 });
 
 // normalizeNetteFiles
-test(function () {
-	Assert::throws(function () {
+test(function (): void {
+	Assert::throws(function (): void {
 		Psr7ServerRequest::normalizeNetteFiles([new stdClass()]);
 	}, InvalidArgumentException::class, 'Invalid value in files specification');
 });
 
 // QueryParams
-test(function () {
+test(function (): void {
 	$_GET['foo'] = 'bar';
 	$request = Psr7ServerRequestFactory::fromSuperGlobal();
 
@@ -50,7 +50,7 @@ test(function () {
 	Assert::equal('bar', $request->getQueryParam('foo'));
 	Assert::equal('baz', $request->getQueryParam('foobar', 'baz'));
 
-	Assert::throws(function () use ($request) {
+	Assert::throws(function () use ($request): void {
 		$request->getQueryParam('baz');
 	}, InvalidStateException::class, 'No query parameter "baz" found');
 });

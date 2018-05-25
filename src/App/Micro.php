@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7\App;
 
@@ -7,11 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 class Micro
 {
 
-	/**
-	 * @param ResponseInterface $response
-	 * @return ResponseInterface
-	 */
-	public function send(ResponseInterface $response)
+	public function send(ResponseInterface $response): ResponseInterface
 	{
 		$this->sendStatus($response);
 		$this->sendHeaders($response);
@@ -20,11 +16,7 @@ class Micro
 		return $response;
 	}
 
-	/**
-	 * @param ResponseInterface $response
-	 * @return void
-	 */
-	protected function sendStatus(ResponseInterface $response)
+	protected function sendStatus(ResponseInterface $response): void
 	{
 		$version = $response->getProtocolVersion();
 		$status = $response->getStatusCode();
@@ -32,11 +24,7 @@ class Micro
 		header(sprintf('HTTP/%s %s %s', $version, $status, $phrase));
 	}
 
-	/**
-	 * @param ResponseInterface $response
-	 * @return void
-	 */
-	protected function sendHeaders(ResponseInterface $response)
+	protected function sendHeaders(ResponseInterface $response): void
 	{
 		foreach ($response->getHeaders() as $name => $values) {
 			$this->sendHeader($name, $values);
@@ -44,25 +32,19 @@ class Micro
 	}
 
 	/**
-	 * @param string $name
-	 * @param array $values
-	 * @return void
+	 * @param string[] $values
 	 */
-	protected function sendHeader($name, $values)
+	protected function sendHeader(string $name, array $values): void
 	{
 		$name = str_replace('-', ' ', $name);
 		$name = ucwords($name);
 		$name = str_replace(' ', '-', $name);
 		foreach ($values as $value) {
-			header(sprintf('%s: %s', $name, $value), FALSE);
+			header(sprintf('%s: %s', $name, $value), false);
 		}
 	}
 
-	/**
-	 * @param ResponseInterface $response
-	 * @return void
-	 */
-	protected function sendBody(ResponseInterface $response)
+	protected function sendBody(ResponseInterface $response): void
 	{
 		$stream = $response->getBody();
 		$stream->rewind();

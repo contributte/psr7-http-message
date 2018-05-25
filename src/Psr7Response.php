@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7;
 
@@ -8,8 +8,6 @@ use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- *
  * @method static withHeader($header, $value)
  */
 class Psr7Response extends Response
@@ -22,11 +20,7 @@ class Psr7Response extends Response
 	 * FACTORY *****************************************************************
 	 */
 
-	/**
-	 * @param ResponseInterface $response
-	 * @return static
-	 */
-	public static function of(ResponseInterface $response)
+	public static function of(ResponseInterface $response): self
 	{
 		return new static(
 			$response->getStatusCode(),
@@ -37,10 +31,7 @@ class Psr7Response extends Response
 		);
 	}
 
-	/**
-	 * @return static
-	 */
-	public static function fromGlobals()
+	public static function fromGlobals(): self
 	{
 		return new static();
 	}

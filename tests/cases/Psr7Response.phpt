@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Test: Psr7Response
@@ -17,7 +17,7 @@ use Tests\Fixtures\JsonObject;
 require_once __DIR__ . '/../bootstrap.php';
 
 // getBody
-test(function () {
+test(function (): void {
 	$response = Psr7ResponseFactory::fromGlobal();
 	$response->getBody()->write('FOO');
 	$response->getBody()->rewind();
@@ -27,7 +27,7 @@ test(function () {
 });
 
 // getContents
-test(function () {
+test(function (): void {
 	$response = Psr7ResponseFactory::fromGlobal();
 	$response->writeBody('FOO');
 
@@ -35,7 +35,7 @@ test(function () {
 });
 
 // writeBody
-test(function () {
+test(function (): void {
 	$response = Psr7ResponseFactory::fromGlobal();
 
 	$response->writeBody('FOO');
@@ -44,12 +44,12 @@ test(function () {
 	$response->writeBody('BAR');
 	Assert::equal('FOOBAR', $response->getContents());
 
-	$response->writeBody(NULL);
+	$response->writeBody(null);
 	Assert::equal('FOOBAR', $response->getContents());
 });
 
 // writeJsonBody
-test(function () {
+test(function (): void {
 	$response = Psr7ResponseFactory::fromGlobal();
 
 	$response = $response->writeJsonBody(['foo' => 'bar']);
@@ -57,7 +57,7 @@ test(function () {
 });
 
 // writeJsonObject
-test(function () {
+test(function (): void {
 	$response = Psr7ResponseFactory::fromGlobal();
 	$jsonObject = new JsonObject('bar');
 	$response = $response->writeJsonObject($jsonObject);
@@ -65,7 +65,7 @@ test(function () {
 });
 
 // appendBody
-test(function () {
+test(function (): void {
 	$response = Psr7ResponseFactory::fromGlobal();
 	$response->writeBody('FOO');
 	$response->appendBody('BAR');
@@ -74,7 +74,7 @@ test(function () {
 });
 
 // of
-test(function () {
+test(function (): void {
 	$response = Psr7Response::fromGlobals()
 		->withStatus(205)
 		->withHeader('X-Foo', 'bar')
@@ -89,7 +89,7 @@ test(function () {
 });
 
 // withAttributes
-test(function () {
+test(function (): void {
 	$response = Psr7Response::fromGlobals()
 		->withHeaders(['X-Foo' => 'bar', 'X-Bar' => 'baz']);
 
@@ -98,18 +98,18 @@ test(function () {
 });
 
 // send [exceptions]
-test(function () {
-	Assert::throws(function () {
+test(function (): void {
+	Assert::throws(function (): void {
 		$response = Psr7Response::fromGlobals();
 		$response->send();
 	}, InvalidStateException::class, 'Cannot send response without Nette\Http\Response');
 
-	Assert::throws(function () {
+	Assert::throws(function (): void {
 		$response = Psr7Response::fromGlobals();
 		$response->sendBody();
 	}, InvalidStateException::class, 'Cannot send response without Nette\Http\Response');
 
-	Assert::throws(function () {
+	Assert::throws(function (): void {
 		$response = Psr7Response::fromGlobals()
 			->withHttpResponse(new Response());
 
@@ -121,7 +121,7 @@ test(function () {
 });
 
 // send
-test(function () {
+test(function (): void {
 	$response = Psr7Response::fromGlobals()
 		->withHeaders(['X-Foo' => 'Bar'])
 		->withHttpResponse(new Response())

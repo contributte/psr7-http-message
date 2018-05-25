@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7\Extra;
 
@@ -14,17 +14,6 @@ trait ExtraRequestTrait
 	/**
 	 * BODY ********************************************************************
 	 */
-
-	/**
-	 * @return mixed
-	 * @deprecated
-	 */
-	public function getBodyClone()
-	{
-		trigger_error('This method is deprecated', E_DEPRECATED);
-
-		return clone $this->getBody();
-	}
 
 	/**
 	 * @return mixed
@@ -46,19 +35,17 @@ trait ExtraRequestTrait
 	}
 
 	/**
-	 * @param bool $assoc
 	 * @return mixed
 	 */
-	public function getJsonBody($assoc = TRUE)
+	public function getJsonBody(bool $assoc = true)
 	{
 		return json_decode((string) $this->getBody(), $assoc);
 	}
 
 	/**
-	 * @param bool $assoc
 	 * @return mixed
 	 */
-	public function getJsonBodyCopy($assoc = TRUE)
+	public function getJsonBodyCopy(bool $assoc = true)
 	{
 		$contents = $this->getJsonBody($assoc);
 		$this->getBody()->rewind();
@@ -70,11 +57,7 @@ trait ExtraRequestTrait
 	 * URI *********************************************************************
 	 */
 
-	/**
-	 * @param string $uri
-	 * @return static
-	 */
-	public function withNewUri($uri)
+	public function withNewUri(string $uri): self
 	{
 		return $this->withUri(new Psr7Uri($uri));
 	}

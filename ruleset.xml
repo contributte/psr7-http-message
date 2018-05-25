@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset name="Contributte">
+	<!-- Contributte Coding Standard -->
+	<rule ref="./vendor/ninjify/coding-standard/contributte.xml">
+		<exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
+
+		<exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint"/>
+		<exclude name="Squiz.Commenting.FunctionComment.SpacingAfter"/>
+	</rule>
+
+	<!-- Specific rules -->
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<properties>
+			<property name="rootNamespaces" type="array" value="
+				src=>Contributte\Psr7,
+				tests/fixtures=>Tests\Fixtures
+			"/>
+		</properties>
+	</rule>
+
+	<!--Exclude folders -->
+	<exclude-pattern>/tests/tmp</exclude-pattern>
+</ruleset>
+
