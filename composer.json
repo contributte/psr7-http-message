@@ -27,7 +27,8 @@
     "ninjify/nunjuck": "^0.2.0",
     "nette/application": "~2.4.12",
     "nette/di": "~2.4.12",
-    "nette/http": "~2.4.9"
+    "nette/http": "~2.4.9",
+    "nette/utils": "~2.5.2"
   },
   "conflict": {
     "nette/di": "<2.4.12",
