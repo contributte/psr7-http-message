@@ -33,7 +33,8 @@
   "conflict": {
     "nette/di": "<2.4.12",
     "nette/application": "<2.4.12",
-    "nette/http": "<2.4.9"
+    "nette/http": "<2.4.9",
+    "nette/utils": "<2.5.2"
   },
   "suggest": {
     "nette/di": "to use Psr7HttpExtension[CompilerExtension]",
@@ -53,15 +54,6 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "scripts": {
-    "ci": [
-      "@tester",
-      "@phpstan",
-      "@qa",
-      "@coverage"
-    ],
-    "fix-style": [
-      "vendor/bin/codefixer"
-    ],
     "qa": [
       "linter src tests",
       "codesniffer src tests"
