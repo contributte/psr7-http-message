@@ -73,10 +73,6 @@
     "phpstan": [
       "temp/phpstan/vendor/bin/phpstan analyse -l max -c phpstan.neon src"
     ]
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "0.4.x-dev"
-    }
+  }
   }
 }
