@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Test: Psr7Uri
@@ -11,7 +11,7 @@ use Tester\Assert;
 require_once __DIR__ . '/../bootstrap.php';
 
 // Nette - UrlScript
-test(function () {
+test(function (): void {
 	$uri = new Psr7Uri();
 	$uri = $uri->withUrlScript(new UrlScript('contributte.org'));
 

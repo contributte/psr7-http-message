@@ -1,6 +1,6 @@
 ## PSR-7
 
-`PSR-7` is HTTP message interface. It's very useful interface especially for middleware / relay pattern. Read more on official [PHP-FIG](http://www.php-fig.org/psr/psr-7/) website. 
+`PSR-7` is HTTP message interface. It's very useful interface especially for middleware / relay pattern. Read more on official [PHP-FIG](http://www.php-fig.org/psr/psr-7/) website.
 
 This package is based on great [guzzle/psr7](https://github.com/guzzle/psr7) implementation. Only adds some extra features for convenient usage in [`Nette Framework`](https://github.com/nette).
 
@@ -76,14 +76,14 @@ $psr7 = $psr7->withApplicationResponse($applicationResponse);
 **MessageInterface**
 
 - `getProtocolVersion: string`
-- `withProtocolVersion($version): static`
+- `withProtocolVersion(string $version): static`
 - `getHeaders(): array`
-- `hasHeader($name): bool`
-- `getHeader($name): string[]`
-- `getHeaderLine($name): string`
-- `withHeader($name, $value): static`
-- `withAddedHeader($name, $value): static`
-- `withoutHeader($name): static`
+- `hasHeader(string $name): bool`
+- `getHeader(string $name): string[]`
+- `getHeaderLine(string $name): string`
+- `withHeader(string $name, string|string[] $value): static`
+- `withAddedHeader(string $name, string|string[] $value): static`
+- `withoutHeader(string $name): static`
 - `getBody(): StreamInterface`
 - `withBody(StreamInterface $body): static`
 
@@ -92,9 +92,9 @@ $psr7 = $psr7->withApplicationResponse($applicationResponse);
 - `getRequestTarget(): string`
 - `withRequestTarget($requestTarget): static`
 - `getMethod(): string`
-- `withMethod($method): static`
+- `withMethod(string $method): static`
 - `getUri(): UriInterface`
-- `withUri(UriInterface $uri, $preserveHost = false): static`
+- `withUri(UriInterface $uri, bool $preserveHost = false): static`
 
 **ServerRequestInterface** << **RequestInterface**
 
@@ -108,14 +108,14 @@ $psr7 = $psr7->withApplicationResponse($applicationResponse);
 - `getParsedBody(): mixed`
 - `withParsedBody($data): static`
 - `getAttributes(): mixed[]`
-- `getAttribute($name, $default = null): mixed`
-- `withAttribute($name, $value): static`
-- `withoutAttribute($name): static`
+- `getAttribute(string $name, $default = null): mixed`
+- `withAttribute(string $name, $value): static`
+- `withoutAttribute(string $name): static`
 
 **ResponseInterface** << **MessageInterface**
 
 - `getStatusCode(): int`
-- `withStatus($code, $reasonPhrase = ''): static`
+- `withStatus(int $code, string $reasonPhrase = ''): static`
 - `getReasonPhrase(): string`
 
 **StreamInterface**
@@ -127,32 +127,32 @@ $psr7 = $psr7->withApplicationResponse($applicationResponse);
 - `tell(): int`
 - `eof(): bool`
 - `isSeekable(): bool`
-- `seek($offset, $whence = SEEK_SET): void`
+- `seek(int $offset, int $whence = SEEK_SET): void`
 - `rewind(): void`
 - `isWritable(): bool`
 - `write($string): void`
 - `isReadable(): bool`
 - `read($length): string`
 - `getContents(): string`
-- `getMetadata($key = null): mixed`
+- `getMetadata(?string $key = null): mixed`
 
 **UriInterface**
 
 - `getScheme(): string`
-- `withScheme($scheme): static`
+- `withScheme(string $scheme): static`
 - `getAuthority(): string`
 - `getUserInfo(): string`
-- `withUserInfo($user, $password = null): static`
+- `withUserInfo(string $user, ?string $password = null): static`
 - `getHost(): string`
-- `withHost($host): static`
+- `withHost(string $host): static`
 - `getPort(): ?int`
-- `withPort($port): static`
+- `withPort(?int $port): static`
 - `getPath(): string`
-- `withPath($path): static`
+- `withPath(string $path): static`
 - `getQuery(): string`
-- `withQuery($query): static`
+- `withQuery(string $query): static`
 - `getFragment(): string`
-- `withFragment($fragment): static`
+- `withFragment(string $fragment): static`
 - `__toString(): string`
 
 **UploadedFileInterface**

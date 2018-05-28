@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7\Nette;
 
@@ -14,19 +14,12 @@ trait NetteRequestTrait
 	/** @var ApplicationRequest */
 	protected $applicationRequest;
 
-	/**
-	 * @return HttpRequest
-	 */
-	public function getHttpRequest()
+	public function getHttpRequest(): HttpRequest
 	{
 		return $this->httpRequest;
 	}
 
-	/**
-	 * @param HttpRequest $request
-	 * @return static
-	 */
-	public function withHttpRequest(HttpRequest $request)
+	public function withHttpRequest(HttpRequest $request): self
 	{
 		$new = clone $this;
 		$new->httpRequest = $request;
@@ -34,19 +27,12 @@ trait NetteRequestTrait
 		return $new;
 	}
 
-	/**
-	 * @return ApplicationRequest
-	 */
-	public function getApplicationRequest()
+	public function getApplicationRequest(): ApplicationRequest
 	{
 		return $this->applicationRequest;
 	}
 
-	/**
-	 * @param ApplicationRequest $request
-	 * @return static
-	 */
-	public function withApplicationRequest(ApplicationRequest $request)
+	public function withApplicationRequest(ApplicationRequest $request): self
 	{
 		$new = clone $this;
 		$new->applicationRequest = $request;

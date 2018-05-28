@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Test: Psr7Request
@@ -15,7 +15,7 @@ use function GuzzleHttp\Psr7\stream_for;
 require_once __DIR__ . '/../bootstrap.php';
 
 // of
-test(function () {
+test(function (): void {
 	$request = Psr7RequestFactory::fromGlobal()
 		->withHeader('X-Foo', 'bar')
 		->withMethod('PUT');
@@ -28,7 +28,7 @@ test(function () {
 });
 
 // getContents
-test(function () {
+test(function (): void {
 	$request = Psr7RequestFactory::fromGlobal()
 		->withBody(stream_for('FOOBAR'));
 
@@ -36,17 +36,17 @@ test(function () {
 });
 
 // getJsonBody
-test(function () {
+test(function (): void {
 	$request = Psr7RequestFactory::fromGlobal()
 		->withBody(stream_for(json_encode(['foo' => 'bar'])));
 
 	Assert::equal(['foo' => 'bar'], $request->getJsonBody());
 	$request->getBody()->rewind();
-	Assert::equal((object) ['foo' => 'bar'], $request->getJsonBody(FALSE));
+	Assert::equal((object) ['foo' => 'bar'], $request->getJsonBody(false));
 });
 
 // withNewUri
-test(function () {
+test(function (): void {
 	$request1 = Psr7RequestFactory::fromGlobal()
 		->withUri(new Psr7Uri('https://contributte.org'));
 
@@ -57,7 +57,7 @@ test(function () {
 });
 
 // withHttpRequest
-test(function () {
+test(function (): void {
 	$httpRequest = (new RequestFactory())->createHttpRequest();
 
 	$request = Psr7RequestFactory::fromGlobal()

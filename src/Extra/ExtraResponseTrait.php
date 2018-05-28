@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7\Extra;
 
@@ -14,9 +14,9 @@ trait ExtraResponseTrait
 
 	/**
 	 * @param mixed $body
-	 * @return static|Psr7Response
+	 * @return Psr7Response
 	 */
-	public function appendBody($body)
+	public function appendBody($body): self
 	{
 		$this->getBody()->write($body);
 
@@ -24,9 +24,9 @@ trait ExtraResponseTrait
 	}
 
 	/**
-	 * @return static|Psr7Response
+	 * @return Psr7Response
 	 */
-	public function rewindBody()
+	public function rewindBody(): self
 	{
 		$this->getBody()->rewind();
 
@@ -35,9 +35,9 @@ trait ExtraResponseTrait
 
 	/**
 	 * @param mixed $body
-	 * @return static|Psr7Response
+	 * @return Psr7Response
 	 */
-	public function writeBody($body)
+	public function writeBody($body): self
 	{
 		$this->getBody()->write($body);
 
@@ -45,10 +45,10 @@ trait ExtraResponseTrait
 	}
 
 	/**
-	 * @param array $data
-	 * @return static|Psr7Response
+	 * @param mixed[] $data
+	 * @return Psr7Response
 	 */
-	public function writeJsonBody(array $data)
+	public function writeJsonBody(array $data): self
 	{
 		return $this
 			->writeBody(json_encode($data))
@@ -56,10 +56,9 @@ trait ExtraResponseTrait
 	}
 
 	/**
-	 * @param JsonSerializable $object
-	 * @return static|Psr7Response
+	 * @return Psr7Response
 	 */
-	public function writeJsonObject(JsonSerializable $object)
+	public function writeJsonObject(JsonSerializable $object): self
 	{
 		return $this
 			->writeBody(json_encode($object))
@@ -67,21 +66,21 @@ trait ExtraResponseTrait
 	}
 
 	/**
-	 * @param bool $assoc
 	 * @return mixed
 	 */
-	public function getJsonBody($assoc = TRUE)
+	public function getJsonBody(bool $assoc = true)
 	{
 		return json_decode($this->getContents(), $assoc);
 	}
 
 	/**
-	 * @param bool $rewind
 	 * @return mixed
 	 */
-	public function getContents($rewind = TRUE)
+	public function getContents(bool $rewind = true)
 	{
-		if ($rewind === TRUE) $this->rewindBody();
+		if ($rewind === true) {
+			$this->rewindBody();
+		}
 
 		return $this->getBody()->getContents();
 	}
@@ -91,10 +90,10 @@ trait ExtraResponseTrait
 	 */
 
 	/**
-	 * @param array $headers
-	 * @return static|Psr7Response
+	 * @param string[]|string[][] $headers
+	 * @return Psr7Response
 	 */
-	public function withHeaders(array $headers)
+	public function withHeaders(array $headers): self
 	{
 		$new = clone $this;
 		foreach ($headers as $key => $value) {

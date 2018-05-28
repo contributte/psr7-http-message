@@ -1,32 +1,22 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7;
 
 use GuzzleHttp\Psr7\Uri;
 use Nette\Http\UrlScript;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- */
 class Psr7Uri extends Uri
 {
 
 	/** @var UrlScript */
 	protected $urlScript;
 
-	/**
-	 * @return UrlScript
-	 */
-	public function getUrlScript()
+	public function getUrlScript(): UrlScript
 	{
 		return $this->urlScript;
 	}
 
-	/**
-	 * @param UrlScript $url
-	 * @return static
-	 */
-	public function withUrlScript(UrlScript $url)
+	public function withUrlScript(UrlScript $url): self
 	{
 		$new = clone $this;
 		$new->urlScript = $url;

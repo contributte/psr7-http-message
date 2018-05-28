@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7;
 
@@ -11,10 +11,7 @@ use Nette\Http\FileUpload;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- *
  * @method Psr7UploadedFile[] getUploadedFiles()
- * @method self|static withAttribute($name, $value)
  * @method self|static withHeader($header, $value)
  */
 class Psr7ServerRequest extends ServerRequest
@@ -24,10 +21,10 @@ class Psr7ServerRequest extends ServerRequest
 	use ExtraServerRequestTrait;
 
 	/**
-	 * @param array $files
+	 * @param FileUpload[] $files
 	 * @return Psr7UploadedFile[]
 	 */
-	public static function normalizeNetteFiles(array $files)
+	public static function normalizeNetteFiles(array $files): array
 	{
 		$normalized = [];
 
@@ -38,7 +35,7 @@ class Psr7ServerRequest extends ServerRequest
 
 			$normalized[] = new Psr7UploadedFile(
 				$file->getTemporaryFile(),
-				intval($file->getSize()),
+				(int) $file->getSize(),
 				$file->getError(),
 				$file->getName(),
 				$file->getContentType()
@@ -52,29 +49,7 @@ class Psr7ServerRequest extends ServerRequest
 	 * ATTRIBUTES **************************************************************
 	 */
 
-	/**
-	 * @param array $attributes
-	 * @return static
-	 */
-	public function withAttributes(array $attributes)
-	{
-		$new = $this;
-		foreach ($attributes as $key => $value) {
-			$new = $new->withAttribute($key, $value);
-		}
-
-		return $new;
-	}
-
-	/**
-	 * FACTORY *****************************************************************
-	 */
-
-	/**
-	 * @param ServerRequestInterface $request
-	 * @return static
-	 */
-	public static function of(ServerRequestInterface $request)
+	public static function of(ServerRequestInterface $request): self
 	{
 		$new = new static(
 			$request->getMethod(),
@@ -93,11 +68,12 @@ class Psr7ServerRequest extends ServerRequest
 	}
 
 	/**
-	 * @return static
+	 * FACTORY *****************************************************************
 	 */
-	public static function fromGlobals()
+
+	public static function fromGlobals(): self
 	{
-		$method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
+		$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 		$headers = function_exists('getallheaders') ? getallheaders() : [];
 		$uri = self::getUriFromGlobals();
 		$body = new LazyOpenStream('php://input', 'r+');
@@ -110,6 +86,19 @@ class Psr7ServerRequest extends ServerRequest
 			->withQueryParams($_GET)
 			->withParsedBody($_POST)
 			->withUploadedFiles(self::normalizeFiles($_FILES));
+	}
+
+	/**
+	 * @param mixed[] $attributes
+	 */
+	public function withAttributes(array $attributes): self
+	{
+		$new = $this;
+		foreach ($attributes as $key => $value) {
+			$new = $new->withAttribute($key, $value);
+		}
+
+		return $new;
 	}
 
 }

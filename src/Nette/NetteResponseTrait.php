@@ -1,11 +1,13 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7\Nette;
 
 use Contributte\Psr7\Exception\Logical\InvalidStateException;
+use Nette\Application\Application;
 use Nette\Application\IResponse as IApplicationResponse;
 use Nette\Http\IResponse as IHttpResponse;
 use Nette\Http\RequestFactory;
+use Nette\Http\Response;
 
 trait NetteResponseTrait
 {
@@ -16,19 +18,12 @@ trait NetteResponseTrait
 	/** @var IApplicationResponse */
 	protected $applicationResponse;
 
-	/**
-	 * @return IHttpResponse
-	 */
-	public function getHttpResponse()
+	public function getHttpResponse(): IHttpResponse
 	{
 		return $this->httpResponse;
 	}
 
-	/**
-	 * @param IHttpResponse $response
-	 * @return static
-	 */
-	public function withHttpResponse(IHttpResponse $response)
+	public function withHttpResponse(IHttpResponse $response): self
 	{
 		$new = clone $this;
 		$new->httpResponse = $response;
@@ -36,27 +31,17 @@ trait NetteResponseTrait
 		return $new;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function hasHttpResponse()
+	public function hasHttpResponse(): bool
 	{
-		return $this->httpResponse !== NULL;
+		return $this->httpResponse !== null;
 	}
 
-	/**
-	 * @return IApplicationResponse
-	 */
-	public function getApplicationResponse()
+	public function getApplicationResponse(): IApplicationResponse
 	{
 		return $this->applicationResponse;
 	}
 
-	/**
-	 * @param IApplicationResponse $response
-	 * @return static
-	 */
-	public function withApplicationResponse(IApplicationResponse $response)
+	public function withApplicationResponse(IApplicationResponse $response): self
 	{
 		$new = clone $this;
 		$new->applicationResponse = $response;
@@ -64,12 +49,9 @@ trait NetteResponseTrait
 		return $new;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function hasApplicationResponse()
+	public function hasApplicationResponse(): bool
 	{
-		return $this->applicationResponse !== NULL;
+		return $this->applicationResponse !== null;
 	}
 
 	/**
@@ -78,10 +60,8 @@ trait NetteResponseTrait
 
 	/**
 	 * Send whole response
-	 *
-	 * @return void
 	 */
-	public function send()
+	public function send(): void
 	{
 		$this->sendHeaders();
 		$this->sendBody();
@@ -89,10 +69,8 @@ trait NetteResponseTrait
 
 	/**
 	 * Send all headers and status code
-	 *
-	 * @return void
 	 */
-	public function sendHeaders()
+	public function sendHeaders(): void
 	{
 		if (!$this->httpResponse) {
 			throw new InvalidStateException('Cannot send response without Nette\Http\Response');
@@ -111,17 +89,15 @@ trait NetteResponseTrait
 
 	/**
 	 * Send body
-	 *
-	 * @return void
 	 */
-	public function sendBody()
+	public function sendBody(): void
 	{
 		if (!$this->httpResponse) {
-			throw new InvalidStateException('Cannot send response without Nette\Http\Response');
+			throw new InvalidStateException(sprintf('Cannot send response without %s', Response::class));
 		}
 
 		if (!$this->applicationResponse) {
-			throw new InvalidStateException('Cannot send response without Nette\Application\Application');
+			throw new InvalidStateException(sprintf('Cannot send response without %s', Application::class));
 		}
 
 		$this->applicationResponse->send((new RequestFactory())->createHttpRequest(), $this->httpResponse);

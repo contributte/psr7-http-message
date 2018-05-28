@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7;
 
@@ -14,18 +14,12 @@ class Psr7ResponseWrapper implements ResponseInterface
 	/** @var ResponseInterface */
 	protected $inner;
 
-	/**
-	 * @param ResponseInterface $inner
-	 */
 	public function __construct(ResponseInterface $inner)
 	{
 		$this->inner = $inner;
 	}
 
-	/**
-	 * @return ResponseInterface
-	 */
-	public function getOriginalResponse()
+	public function getOriginalResponse(): ResponseInterface
 	{
 		return $this->inner;
 	}
@@ -34,19 +28,15 @@ class Psr7ResponseWrapper implements ResponseInterface
 	 * INTERFACE ***************************************************************
 	 */
 
-	/**
-	 * @return string
-	 */
-	public function getProtocolVersion()
+	public function getProtocolVersion(): string
 	{
 		return $this->inner->getProtocolVersion();
 	}
 
 	/**
 	 * @param string $version
-	 * @return static
 	 */
-	public function withProtocolVersion($version)
+	public function withProtocolVersion($version): self
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withProtocolVersion($version);
@@ -57,16 +47,15 @@ class Psr7ResponseWrapper implements ResponseInterface
 	/**
 	 * @return string[][]
 	 */
-	public function getHeaders()
+	public function getHeaders(): array
 	{
 		return $this->inner->getHeaders();
 	}
 
 	/**
 	 * @param string $name
-	 * @return bool
 	 */
-	public function hasHeader($name)
+	public function hasHeader($name): bool
 	{
 		return $this->inner->hasHeader($name);
 	}
@@ -75,26 +64,24 @@ class Psr7ResponseWrapper implements ResponseInterface
 	 * @param string $name
 	 * @return string[]
 	 */
-	public function getHeader($name)
+	public function getHeader($name): array
 	{
 		return $this->inner->getHeader($name);
 	}
 
 	/**
 	 * @param string $name
-	 * @return string
 	 */
-	public function getHeaderLine($name)
+	public function getHeaderLine($name): string
 	{
 		return $this->inner->getHeaderLine($name);
 	}
 
 	/**
-	 * @param string $name
+	 * @param string          $name
 	 * @param string|string[] $value
-	 * @return static
 	 */
-	public function withHeader($name, $value)
+	public function withHeader($name, $value): self
 	{
 		$this->inner = $this->inner->withHeader($name, $value);
 
@@ -102,11 +89,10 @@ class Psr7ResponseWrapper implements ResponseInterface
 	}
 
 	/**
-	 * @param string $name
+	 * @param string          $name
 	 * @param string|string[] $value
-	 * @return static
 	 */
-	public function withAddedHeader($name, $value)
+	public function withAddedHeader($name, $value): self
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withAddedHeader($name, $value);
@@ -116,9 +102,8 @@ class Psr7ResponseWrapper implements ResponseInterface
 
 	/**
 	 * @param string $name
-	 * @return static
 	 */
-	public function withoutHeader($name)
+	public function withoutHeader($name): self
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withoutHeader($name);
@@ -126,19 +111,12 @@ class Psr7ResponseWrapper implements ResponseInterface
 		return $new;
 	}
 
-	/**
-	 * @return StreamInterface
-	 */
-	public function getBody()
+	public function getBody(): StreamInterface
 	{
 		return $this->inner->getBody();
 	}
 
-	/**
-	 * @param StreamInterface $body
-	 * @return static
-	 */
-	public function withBody(StreamInterface $body)
+	public function withBody(StreamInterface $body): self
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withBody($body);
@@ -146,20 +124,16 @@ class Psr7ResponseWrapper implements ResponseInterface
 		return $new;
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getStatusCode()
+	public function getStatusCode(): int
 	{
 		return $this->inner->getStatusCode();
 	}
 
 	/**
-	 * @param int $code
+	 * @param int    $code
 	 * @param string $reasonPhrase
-	 * @return static
 	 */
-	public function withStatus($code, $reasonPhrase = '')
+	public function withStatus($code, $reasonPhrase = ''): self
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withStatus($code, $reasonPhrase);
@@ -167,10 +141,7 @@ class Psr7ResponseWrapper implements ResponseInterface
 		return $new;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getReasonPhrase()
+	public function getReasonPhrase(): string
 	{
 		return $this->inner->getReasonPhrase();
 	}

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7;
 
@@ -8,124 +8,88 @@ use RuntimeException;
 class NullStream implements StreamInterface
 {
 
-	/**
-	 * @return null
-	 */
-	public function getContents()
+	public function getContents(): string
 	{
-		return NULL;
+		return '';
 	}
 
-	/**
-	 * @return void
-	 */
-	public function close()
+	public function close(): void
 	{
 	}
 
-	/**
-	 * @return void
-	 */
-	public function detach()
+	public function detach(): void
 	{
 		$this->close();
 	}
 
-	/**
-	 * @return int
-	 */
-	public function getSize()
+	public function getSize(): int
 	{
 		return 0;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function isReadable()
+	public function isReadable(): bool
 	{
-		return FALSE;
+		return false;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function isWritable()
+	public function isWritable(): bool
 	{
-		return FALSE;
+		return false;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function isSeekable()
+	public function isSeekable(): bool
 	{
-		return FALSE;
+		return false;
 	}
 
-	/**
-	 * @return void
-	 */
-	public function rewind()
+	public function rewind(): void
 	{
 	}
 
 	/**
 	 * @param int $offset
 	 * @param int $whence
-	 * @return void
 	 */
-	public function seek($offset, $whence = SEEK_SET)
+	public function seek($offset, $whence = SEEK_SET): void
 	{
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function eof()
+	public function eof(): bool
 	{
-		return TRUE;
+		return true;
 	}
 
-	/**
-	 * @return void
-	 */
-	public function tell()
+	public function tell(): void
 	{
 		throw new RuntimeException('Null streams cannot tell position');
 	}
 
 	/**
 	 * @param int $length
-	 * @return void
 	 */
-	public function read($length)
+	public function read($length): void
 	{
 		throw new RuntimeException('Null streams cannot read');
 	}
 
 	/**
 	 * @param mixed $data
-	 * @return void
 	 */
-	public function write($data)
+	public function write($data): void
 	{
 		throw new RuntimeException('Null streams cannot write');
 	}
 
 	/**
-	 * @param string $key
+	 * @param null|string $key
 	 * @return null
 	 */
-	public function getMetadata($key = NULL)
+	public function getMetadata($key = null)
 	{
-		return NULL;
+		return null;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function __toString()
+	public function __toString(): string
 	{
 		return $this->getContents();
 	}

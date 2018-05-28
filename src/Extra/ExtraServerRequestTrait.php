@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7\Extra;
 
@@ -15,10 +15,8 @@ trait ExtraServerRequestTrait
 
 	/**
 	 * @param string $name
-	 *
-	 * @return bool
 	 */
-	public function hasQueryParam($name)
+	public function hasQueryParam($name): bool
 	{
 		return array_key_exists($name, $this->getQueryParams());
 	}
@@ -28,7 +26,7 @@ trait ExtraServerRequestTrait
 	 * @param mixed $default
 	 * @return mixed
 	 */
-	public function getQueryParam($name, $default = NULL)
+	public function getQueryParam($name, $default = null)
 	{
 		if (!$this->hasQueryParam($name)) {
 			if (func_num_args() < 2) {

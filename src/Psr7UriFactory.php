@@ -1,22 +1,15 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7;
 
 use Nette\Http\UrlScript;
 
-/**
- * @author Milan Felix Sulc <sulcmil@gmail.com>
- */
 class Psr7UriFactory
 {
 
-	/**
-	 * @param UrlScript $url
-	 * @return Psr7Uri
-	 */
-	public static function fromNette(UrlScript $url)
+	public static function fromNette(UrlScript $url): Psr7Uri
 	{
-		$uri = (string) $url;
+		$uri = $url->getAbsoluteUrl();
 
 		if ($uri === 'http:///' && PHP_SAPI === 'cli') {
 			$psr7 = new Psr7Uri();

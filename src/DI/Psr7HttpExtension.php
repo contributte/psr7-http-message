@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Psr7\DI;
 
@@ -13,19 +13,17 @@ class Psr7HttpExtension extends CompilerExtension
 
 	/**
 	 * Register services
-	 *
-	 * @return void
 	 */
-	public function loadConfiguration()
+	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('request'))
-			->setClass(Psr7Request::class)
+			->setType(Psr7Request::class)
 			->setFactory(Psr7RequestFactory::class . '::fromNette');
 
 		$builder->addDefinition($this->prefix('response'))
-			->setClass(Psr7Response::class)
+			->setType(Psr7Response::class)
 			->setFactory(Psr7ResponseFactory::class . '::fromNette');
 	}
 
