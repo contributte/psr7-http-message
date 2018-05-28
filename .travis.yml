@@ -53,6 +53,7 @@ jobs:
 
   allow_failures:
     - stage: Test Coverage
+    - stage: Phpstan
 
 after_failure:
   # Print *.actual content
