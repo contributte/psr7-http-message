@@ -274,8 +274,9 @@ class ProxyRequest implements ServerRequestInterface
 	 * @see getAttributes()
 	 * @param string $name
 	 * @param mixed  $default
+	 * @return mixed
 	 */
-	public function getAttribute($name, $default = null): self
+	public function getAttribute($name, $default = null)
 	{
 		return $this->inner->getAttribute($name, $default);
 	}
