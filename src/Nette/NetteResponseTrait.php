@@ -13,13 +13,13 @@ use Nette\Http\Response;
 trait NetteResponseTrait
 {
 
-	/** @var IHttpResponse */
+	/** @var IHttpResponse|null */
 	protected $httpResponse;
 
-	/** @var IApplicationResponse */
+	/** @var IApplicationResponse|null */
 	protected $applicationResponse;
 
-	public function getHttpResponse(): IHttpResponse
+	public function getHttpResponse(): ?IHttpResponse
 	{
 		return $this->httpResponse;
 	}
@@ -40,7 +40,7 @@ trait NetteResponseTrait
 		return $this->httpResponse !== null;
 	}
 
-	public function getApplicationResponse(): IApplicationResponse
+	public function getApplicationResponse(): ?IApplicationResponse
 	{
 		return $this->applicationResponse;
 	}
