@@ -2,6 +2,7 @@
 
 namespace Contributte\Psr7\Nette;
 
+use Contributte\Psr7\Psr7Request;
 use Nette\Application\Request as ApplicationRequest;
 use Nette\Http\IRequest as HttpRequest;
 
@@ -19,7 +20,10 @@ trait NetteRequestTrait
 		return $this->httpRequest;
 	}
 
-	public function withHttpRequest(HttpRequest $request): self
+	/**
+	 * @return Psr7Request|self
+	 */
+	public function withHttpRequest(HttpRequest $request)
 	{
 		$new = clone $this;
 		$new->httpRequest = $request;
@@ -32,7 +36,10 @@ trait NetteRequestTrait
 		return $this->applicationRequest;
 	}
 
-	public function withApplicationRequest(ApplicationRequest $request): self
+	/**
+	 * @return Psr7Request|self
+	 */
+	public function withApplicationRequest(ApplicationRequest $request)
 	{
 		$new = clone $this;
 		$new->applicationRequest = $request;

@@ -3,6 +3,7 @@
 namespace Contributte\Psr7\Nette;
 
 use Contributte\Psr7\Exception\Logical\InvalidStateException;
+use Contributte\Psr7\Psr7Response;
 use Nette\Application\Application;
 use Nette\Application\IResponse as IApplicationResponse;
 use Nette\Http\IResponse as IHttpResponse;
@@ -12,18 +13,21 @@ use Nette\Http\Response;
 trait NetteResponseTrait
 {
 
-	/** @var IHttpResponse */
+	/** @var IHttpResponse|null */
 	protected $httpResponse;
 
-	/** @var IApplicationResponse */
+	/** @var IApplicationResponse|null */
 	protected $applicationResponse;
 
-	public function getHttpResponse(): IHttpResponse
+	public function getHttpResponse(): ?IHttpResponse
 	{
 		return $this->httpResponse;
 	}
 
-	public function withHttpResponse(IHttpResponse $response): self
+	/**
+	 * @return Psr7Response|self
+	 */
+	public function withHttpResponse(IHttpResponse $response)
 	{
 		$new = clone $this;
 		$new->httpResponse = $response;
@@ -36,12 +40,15 @@ trait NetteResponseTrait
 		return $this->httpResponse !== null;
 	}
 
-	public function getApplicationResponse(): IApplicationResponse
+	public function getApplicationResponse(): ?IApplicationResponse
 	{
 		return $this->applicationResponse;
 	}
 
-	public function withApplicationResponse(IApplicationResponse $response): self
+	/**
+	 * @return Psr7Response|self
+	 */
+	public function withApplicationResponse(IApplicationResponse $response)
 	{
 		$new = clone $this;
 		$new->applicationResponse = $response;
