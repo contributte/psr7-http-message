@@ -40,6 +40,23 @@ $psr7 = $psr7->withHttpRequest($httpRequest);
 $psr7 = $psr7->withApplicationRequest($applicationRequest);
 ```
 
+Additional methods (against PSR7 interface):
+- of(RequestInterface $request): self
+- getContents(): mixed
+- getContentsCopy(): mixed
+- getJsonBody(bool $associative = true): mixed
+- getJsonBodyCopy(bool $associative = true): mixed
+- withNewUri(string $uri): self - returns clone with given url
+
+## `Psr7ServerRequest`
+
+Additional methods (against PSR7 interface):
+- normalizeNetteFiles(Nette\Http\FileUpload[] $files): Psr7UploadedFile[]
+- of(ServerRequestInterface $request): self
+- fromGlobals(): self
+- withAttributes(array $attributes): self
+- hasQueryParam(string $name): bool
+- getQueryParam(string $name, mixed $default = null): mixed
 
 ## `Psr7Response`
 
@@ -70,6 +87,26 @@ $psr7 = $psr7->withHttpResponse($httpResponse);
 $psr7 = $psr7->withApplicationResponse($applicationResponse);
 ```
 
+Additional methods (against PSR7 interface):
+- of(ResponseInterface $response): self
+- fromGlobals(): self
+- appendBody(mixed $body): self
+- rewindBody(): self
+- writeBody(mixed $body): self
+- writeJsonBody(array $data): self
+- writeJsonObject(JsonSerializable $object): self
+- getJsonBody(bool $associative = true): mixed
+- getContents(bool $rewind = true): mixed
+- withHeaders(array $headers): self
+- getHttpResponse(): ?Nette\Http\IResponse
+- withHttpResponse(Nette\Http\IResponse $response)
+- hasHttpResponse(): bool
+- getApplicationResponse(): ?Nette\Application\IResponse
+- withApplicationResponse(Nette\Application\IResponse $response)
+- hasApplicationResponse(): bool
+- send(): void
+- sendHeaders(): void
+- sendBody(): void
 
 ## API
 
