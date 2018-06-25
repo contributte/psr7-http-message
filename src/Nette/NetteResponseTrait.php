@@ -80,7 +80,7 @@ trait NetteResponseTrait
 	public function sendHeaders(): void
 	{
 		if (!$this->httpResponse) {
-			throw new InvalidStateException('Cannot send response without Nette\Http\Response');
+			throw new InvalidStateException(sprintf('Cannot send response without %s', Response::class));
 		}
 
 		// Send status code
