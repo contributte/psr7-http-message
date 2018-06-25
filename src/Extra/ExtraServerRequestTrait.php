@@ -13,20 +13,16 @@ trait ExtraServerRequestTrait
 	 * QUERY PARAM *************************************************************
 	 */
 
-	/**
-	 * @param string $name
-	 */
-	public function hasQueryParam($name): bool
+	public function hasQueryParam(string $name): bool
 	{
 		return array_key_exists($name, $this->getQueryParams());
 	}
 
 	/**
-	 * @param string $name
 	 * @param mixed $default
 	 * @return mixed
 	 */
-	public function getQueryParam($name, $default = null)
+	public function getQueryParam(string $name, $default = null)
 	{
 		if (!$this->hasQueryParam($name)) {
 			if (func_num_args() < 2) {
