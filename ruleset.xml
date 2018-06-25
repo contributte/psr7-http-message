@@ -6,6 +6,7 @@
 
 		<exclude name="SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingParameterTypeHint"/>
 		<exclude name="Squiz.Commenting.FunctionComment.SpacingAfter"/>
+		<exclude name="Squiz.Commenting.FunctionComment.InvalidTypeHint"/>
 	</rule>
 
 	<!-- Specific rules -->
