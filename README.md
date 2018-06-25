@@ -26,8 +26,8 @@ composer require contributte/psr7-http-message
 
 | State       | Version   | Branch   | PHP      |
 |-------------|-----------|----------|----------|
-| development | `^0.5.0`  | `master` | `>= 7.1` |
-| stable      | `^0.4.0`  | `master` | `>= 7.1` |
+| development | `^0.6.0`  | `master` | `>= 7.1` |
+| stable      | `^0.5.0`  | `master` | `>= 7.1` |
 | stable      | `^0.3.0`  | `master` | `>= 5.6` |
 
 ## Prolog
