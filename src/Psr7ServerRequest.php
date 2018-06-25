@@ -21,7 +21,7 @@ class Psr7ServerRequest extends ServerRequest
 	use ExtraServerRequestTrait;
 
 	/**
-	 * @param FileUpload[] $files
+	 * @param FileUpload[]|FileUpload[][]|null[]|null[][] $files
 	 * @return Psr7UploadedFile[]
 	 */
 	public static function normalizeNetteFiles(array $files): array
@@ -29,17 +29,21 @@ class Psr7ServerRequest extends ServerRequest
 		$normalized = [];
 
 		foreach ($files as $file) {
-			if (!($file instanceof FileUpload)) {
+			if ($file instanceof FileUpload) {
+				$normalized[] = new Psr7UploadedFile(
+					$file->getTemporaryFile(),
+					(int) $file->getSize(),
+					$file->getError(),
+					$file->getName(),
+					$file->getContentType()
+				);
+			} elseif (is_array($file)) {
+				$normalized = array_merge($normalized, self::normalizeNetteFiles($file));
+			} elseif ($file === null) {
+				continue;
+			} else {
 				throw new InvalidArgumentException('Invalid value in files specification');
 			}
-
-			$normalized[] = new Psr7UploadedFile(
-				$file->getTemporaryFile(),
-				(int) $file->getSize(),
-				$file->getError(),
-				$file->getName(),
-				$file->getContentType()
-			);
 		}
 
 		return $normalized;
