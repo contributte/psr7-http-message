@@ -7,6 +7,7 @@
 use Contributte\Psr7\Exception\Logical\InvalidStateException;
 use Contributte\Psr7\Psr7ServerRequest;
 use Contributte\Psr7\Psr7ServerRequestFactory;
+use Nette\Http\FileUpload;
 use Tester\Assert;
 
 require_once __DIR__ . '/../bootstrap.php';
@@ -35,6 +36,34 @@ test(function (): void {
 });
 
 // normalizeNetteFiles
+test(function (): void {
+	$values = [
+		'name' => 'foo',
+		'size' => 4096,
+		'tmp_name' => __DIR__ . '/../fixtures/bar.txt',
+		'error' => UPLOAD_ERR_OK,
+	];
+	$file1 = new FileUpload($values);
+	$file2 = new FileUpload($values);
+	$file3 = null;
+	$file4 = new FileUpload($values);
+	$file5 = null;
+	$file6 = new FileUpload($values);
+
+	$passed = [
+		$file1,
+		[
+			$file2,
+			$file3,
+			$file4,
+		],
+		$file5,
+		$file6,
+	];
+
+	Assert::count(4, Psr7ServerRequest::normalizeNetteFiles($passed));
+});
+
 test(function (): void {
 	Assert::throws(function (): void {
 		Psr7ServerRequest::normalizeNetteFiles([new stdClass()]);
