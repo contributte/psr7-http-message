@@ -2,7 +2,6 @@
 
 namespace Contributte\Psr7\Extra;
 
-use Contributte\Psr7\Psr7Request;
 use Contributte\Psr7\Psr7Stream;
 use Contributte\Psr7\Psr7Uri;
 
@@ -59,7 +58,7 @@ trait ExtraRequestTrait
 	 */
 
 	/**
-	 * @return Psr7Request|self
+	 * @return static
 	 */
 	public function withNewUri(string $uri)
 	{

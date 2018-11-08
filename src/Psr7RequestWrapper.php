@@ -36,6 +36,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 
 	/**
 	 * @param string $version
+	 * @return static
 	 */
 	public function withProtocolVersion($version): self
 	{
@@ -81,6 +82,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 	/**
 	 * @param string          $name
 	 * @param string|string[] $value
+	 * @return static
 	 */
 	public function withHeader($name, $value): self
 	{
@@ -93,6 +95,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 	/**
 	 * @param string          $name
 	 * @param string|string[] $value
+	 * @return static
 	 */
 	public function withAddedHeader($name, $value): self
 	{
@@ -104,6 +107,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 
 	/**
 	 * @param string $name
+	 * @return static
 	 */
 	public function withoutHeader($name): self
 	{
@@ -118,6 +122,9 @@ class Psr7RequestWrapper implements ServerRequestInterface
 		return $this->inner->getBody();
 	}
 
+	/**
+	 * @return static
+	 */
 	public function withBody(StreamInterface $body): self
 	{
 		$new = clone $this;
@@ -133,6 +140,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 
 	/**
 	 * @param mixed $requestTarget
+	 * @return static
 	 */
 	public function withRequestTarget($requestTarget): self
 	{
@@ -149,6 +157,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 
 	/**
 	 * @param string $method
+	 * @return static
 	 */
 	public function withMethod($method): self
 	{
@@ -163,6 +172,10 @@ class Psr7RequestWrapper implements ServerRequestInterface
 		return $this->inner->getUri();
 	}
 
+	/**
+	 * @param bool $preserveHost
+	 * @return static
+	 */
 	public function withUri(UriInterface $uri, $preserveHost = false): self
 	{
 		$new = clone $this;
@@ -189,6 +202,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 
 	/**
 	 * @param mixed[] $cookies
+	 * @return static
 	 */
 	public function withCookieParams(array $cookies): self
 	{
@@ -208,6 +222,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 
 	/**
 	 * @param mixed[] $query
+	 * @return static
 	 */
 	public function withQueryParams(array $query): self
 	{
@@ -227,6 +242,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 
 	/**
 	 * @param mixed[] $uploadedFiles
+	 * @return static
 	 */
 	public function withUploadedFiles(array $uploadedFiles): self
 	{
@@ -237,7 +253,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 	}
 
 	/**
-	 * @return null|mixed[]|object
+	 * @return mixed[]|object|null
 	 */
 	public function getParsedBody()
 	{
@@ -245,7 +261,8 @@ class Psr7RequestWrapper implements ServerRequestInterface
 	}
 
 	/**
-	 * @param null|mixed[]|object $data
+	 * @param mixed[]|object|null $data
+	 * @return static
 	 */
 	public function withParsedBody($data): self
 	{
@@ -278,6 +295,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 	 * @see getAttributes()
 	 * @param string $name
 	 * @param mixed  $value
+	 * @return static
 	 */
 	public function withAttribute($name, $value): self
 	{
@@ -290,6 +308,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 	/**
 	 * @see getAttributes()
 	 * @param string $name
+	 * @return static
 	 */
 	public function withoutAttribute($name): self
 	{

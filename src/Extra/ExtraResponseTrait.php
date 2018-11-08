@@ -91,7 +91,7 @@ trait ExtraResponseTrait
 
 	/**
 	 * @param string[]|string[][] $headers
-	 * @return Psr7Response|self
+	 * @return static
 	 */
 	public function withHeaders(array $headers)
 	{

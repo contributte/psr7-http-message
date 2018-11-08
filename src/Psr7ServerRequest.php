@@ -94,6 +94,7 @@ class Psr7ServerRequest extends ServerRequest
 
 	/**
 	 * @param mixed[] $attributes
+	 * @return static
 	 */
 	public function withAttributes(array $attributes): self
 	{
