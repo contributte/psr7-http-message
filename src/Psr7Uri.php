@@ -16,6 +16,9 @@ class Psr7Uri extends Uri
 		return $this->urlScript;
 	}
 
+	/**
+	 * @return static
+	 */
 	public function withUrlScript(UrlScript $url): self
 	{
 		$new = clone $this;

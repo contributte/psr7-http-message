@@ -35,6 +35,7 @@ class Psr7ResponseWrapper implements ResponseInterface
 
 	/**
 	 * @param string $version
+	 * @return static
 	 */
 	public function withProtocolVersion($version): self
 	{
@@ -80,6 +81,7 @@ class Psr7ResponseWrapper implements ResponseInterface
 	/**
 	 * @param string          $name
 	 * @param string|string[] $value
+	 * @return static
 	 */
 	public function withHeader($name, $value): self
 	{
@@ -91,6 +93,7 @@ class Psr7ResponseWrapper implements ResponseInterface
 	/**
 	 * @param string          $name
 	 * @param string|string[] $value
+	 * @return static
 	 */
 	public function withAddedHeader($name, $value): self
 	{
@@ -102,6 +105,7 @@ class Psr7ResponseWrapper implements ResponseInterface
 
 	/**
 	 * @param string $name
+	 * @return static
 	 */
 	public function withoutHeader($name): self
 	{
@@ -116,6 +120,9 @@ class Psr7ResponseWrapper implements ResponseInterface
 		return $this->inner->getBody();
 	}
 
+	/**
+	 * @return static
+	 */
 	public function withBody(StreamInterface $body): self
 	{
 		$new = clone $this;
@@ -132,6 +139,7 @@ class Psr7ResponseWrapper implements ResponseInterface
 	/**
 	 * @param int    $code
 	 * @param string $reasonPhrase
+	 * @return static
 	 */
 	public function withStatus($code, $reasonPhrase = ''): self
 	{
