@@ -1,4 +1,20 @@
 includes:
-	- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
+	- temp/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
 	- temp/phpstan/vendor/phpstan/phpstan-nette/extension.neon
 	- temp/phpstan/vendor/phpstan/phpstan-nette/rules.neon
+	- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+	ignoreErrors:
+		# Psr7ServerRequest::normalizeNetteFiles validate if invalid data are not given, so there is mismatch between parameters and code
+		- '#^Strict comparison using === between null and null will always evaluate to true\.$#'
+
+		# Nette\Http\FileUpload is created from string values of request -> it is string
+		- "#^Casting to int something that's already int\\.$#"
+
+		# Cannot specify return typehint in that rare case of returning static in trait
+		- '#^Method Contributte\\Psr7\\ProxyRequest\:\:.* has no return typehint specified\.$#'
+		- '#^Method Contributte\\Psr7\\Psr7ServerRequest\:\:.* has no return typehint specified\.$#'
+		# Reported just locally, not in CI
+		#- '#^Method Contributte\\Psr7\\Psr7Request\:\:.* has no return typehint specified\.$#'
+		#- '#^Method Contributte\\Psr7\\Psr7Response\:\:.* has no return typehint specified\.$#'

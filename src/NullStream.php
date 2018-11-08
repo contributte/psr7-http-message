@@ -81,7 +81,7 @@ class NullStream implements StreamInterface
 	}
 
 	/**
-	 * @param null|string $key
+	 * @param string|null $key
 	 * @return null
 	 */
 	public function getMetadata($key = null)

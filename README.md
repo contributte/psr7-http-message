@@ -7,10 +7,10 @@
 [![Build Status](https://img.shields.io/travis/contributte/psr7-http-message.svg?style=flat-square)](https://travis-ci.org/contributte/psr7-http-message)
 [![Code coverage](https://img.shields.io/coveralls/contributte/psr7-http-message.svg?style=flat-square)](https://coveralls.io/r/contributte/psr7-http-message)
 [![Licence](https://img.shields.io/packagist/l/contributte/psr7-http-message.svg?style=flat-square)](https://packagist.org/packages/contributte/psr7-http-message)
-
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/psr7-http-message.svg?style=flat-square)](https://packagist.org/packages/contributte/psr7-http-message)
 [![Downloads total](https://img.shields.io/packagist/dt/contributte/psr7-http-message.svg?style=flat-square)](https://packagist.org/packages/contributte/psr7-http-message)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/psr7-http-message.svg?style=flat-square)](https://packagist.org/packages/contributte/psr7-http-message)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
 
 ## Discussion / Help
 
@@ -70,7 +70,7 @@ The development is sponsored by [Tlapnet](http://www.tlapnet.cz). Thank you guys
       </td>
       <td align="center">
         <a href="https://github.com/mabar">
-            <img width="150" height="150" src="https://avatars0.githubusercontent.com/u/20974277?s=400&v=4">
+            <img width="150" height="150" src="https://avatars0.githubusercontent.com/u/20974277?s=150&v=4">
         </a>
         </br>
         <a href="https://github.com/mabar">Marek Bartoš</a>
