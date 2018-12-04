@@ -20,7 +20,7 @@
   ],
   "require": {
     "php": ">= 7.1",
-    "guzzlehttp/psr7": "~1.4.2"
+    "guzzlehttp/psr7": "^1.4.2"
   },
   "require-dev": {
     "ninjify/qa": "^0.8.0",
