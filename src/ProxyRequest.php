@@ -237,7 +237,7 @@ class ProxyRequest implements ServerRequestInterface
 	}
 
 	/**
-	 * @return mixed[]
+	 * @return UploadedFileInterface[]
 	 */
 	public function getUploadedFiles(): array
 	{

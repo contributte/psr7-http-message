@@ -4,6 +4,7 @@ namespace Contributte\Psr7;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UploadedFileInterface;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -233,7 +234,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 	}
 
 	/**
-	 * @return mixed[]
+	 * @return UploadedFileInterface[]
 	 */
 	public function getUploadedFiles(): array
 	{
@@ -241,7 +242,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 	}
 
 	/**
-	 * @param mixed[] $uploadedFiles
+	 * @param UploadedFileInterface[] $uploadedFiles
 	 * @return static
 	 */
 	public function withUploadedFiles(array $uploadedFiles): self
