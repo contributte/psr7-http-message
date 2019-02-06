@@ -8,8 +8,8 @@ use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * @method self|static withAttribute($name, $value)
- * @method self|static withHeader($header, $value)
+ * @method static withAttribute($name, $value)
+ * @method static withHeader($header, $value)
  */
 class Psr7Request extends Request
 {
@@ -21,6 +21,9 @@ class Psr7Request extends Request
 	 * FACTORY *****************************************************************
 	 */
 
+	/**
+	 * @return static
+	 */
 	public static function of(RequestInterface $request): self
 	{
 		$new = new static(

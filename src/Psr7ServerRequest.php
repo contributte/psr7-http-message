@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * @method Psr7UploadedFile[] getUploadedFiles()
- * @method self|static withHeader($header, $value)
+ * @method static withHeader($header, $value)
  */
 class Psr7ServerRequest extends ServerRequest
 {
@@ -53,6 +53,9 @@ class Psr7ServerRequest extends ServerRequest
 	 * ATTRIBUTES **************************************************************
 	 */
 
+	/**
+	 * @return static
+	 */
 	public static function of(ServerRequestInterface $request): self
 	{
 		$new = new static(
@@ -75,6 +78,9 @@ class Psr7ServerRequest extends ServerRequest
 	 * FACTORY *****************************************************************
 	 */
 
+	/**
+	 * @return static
+	 */
 	public static function fromGlobals(): self
 	{
 		$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
