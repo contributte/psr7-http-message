@@ -7,10 +7,6 @@ use Contributte\Psr7\Nette\NetteRequestTrait;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 
-/**
- * @method static withAttribute($name, $value)
- * @method static withHeader($header, $value)
- */
 class Psr7Request extends Request
 {
 

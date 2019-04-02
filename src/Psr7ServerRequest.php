@@ -12,7 +12,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * @method Psr7UploadedFile[] getUploadedFiles()
- * @method static withHeader($header, $value)
  */
 class Psr7ServerRequest extends ServerRequest
 {

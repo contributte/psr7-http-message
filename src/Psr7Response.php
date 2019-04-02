@@ -7,9 +7,6 @@ use Contributte\Psr7\Nette\NetteResponseTrait;
 use GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * @method static withHeader($header, $value)
- */
 class Psr7Response extends Response
 {
 
