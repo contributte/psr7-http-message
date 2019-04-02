@@ -2,7 +2,6 @@
 
 namespace Contributte\Psr7\Extra;
 
-use Contributte\Psr7\Psr7Response;
 use Contributte\Psr7\Psr7Stream;
 use JsonSerializable;
 
@@ -14,7 +13,7 @@ trait ExtraResponseTrait
 
 	/**
 	 * @param mixed $body
-	 * @return Psr7Response|self
+	 * @return static
 	 */
 	public function appendBody($body)
 	{
@@ -24,7 +23,7 @@ trait ExtraResponseTrait
 	}
 
 	/**
-	 * @return Psr7Response|self
+	 * @return static
 	 */
 	public function rewindBody()
 	{
@@ -35,7 +34,7 @@ trait ExtraResponseTrait
 
 	/**
 	 * @param mixed $body
-	 * @return Psr7Response|self
+	 * @return static
 	 */
 	public function writeBody($body)
 	{
@@ -46,7 +45,7 @@ trait ExtraResponseTrait
 
 	/**
 	 * @param mixed[] $data
-	 * @return Psr7Response|self
+	 * @return static
 	 */
 	public function writeJsonBody(array $data)
 	{
@@ -56,7 +55,7 @@ trait ExtraResponseTrait
 	}
 
 	/**
-	 * @return Psr7Response|self
+	 * @return static
 	 */
 	public function writeJsonObject(JsonSerializable $object)
 	{
