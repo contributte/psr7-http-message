@@ -17,9 +17,14 @@ class NullStream implements StreamInterface
 	{
 	}
 
-	public function detach(): void
+	/**
+	 * @return resource|null
+	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.TypeHintDeclaration.MissingReturnTypeHint
+	 */
+	public function detach()
 	{
 		$this->close();
+		return null;
 	}
 
 	public function getSize(): int
@@ -59,7 +64,7 @@ class NullStream implements StreamInterface
 		return true;
 	}
 
-	public function tell(): void
+	public function tell(): int
 	{
 		throw new RuntimeException('Null streams cannot tell position');
 	}
@@ -67,7 +72,7 @@ class NullStream implements StreamInterface
 	/**
 	 * @param int $length
 	 */
-	public function read($length): void
+	public function read($length): string
 	{
 		throw new RuntimeException('Null streams cannot read');
 	}
@@ -75,7 +80,7 @@ class NullStream implements StreamInterface
 	/**
 	 * @param mixed $data
 	 */
-	public function write($data): void
+	public function write($data): int
 	{
 		throw new RuntimeException('Null streams cannot write');
 	}
