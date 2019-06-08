@@ -1,15 +1,20 @@
-## PSR-7
+# Contributte PSR-7
 
 `PSR-7` is HTTP message interface. It's very useful interface especially for middleware / relay pattern. Read more on official [PHP-FIG](http://www.php-fig.org/psr/psr-7/) website.
 
 This package is based on great [guzzle/psr7](https://github.com/guzzle/psr7) implementation. Only adds some extra features for convenient usage in [`Nette Framework`](https://github.com/nette).
 
-
 ## Content
 
-- [Psr7Request - modified Guzzle PSR-7 request](#psr7request)
-- [Psr7Response - modified Guzzle PSR-7 response](#psr7response)
+- [Setup](#setup)
+- [Psr7Request](#psr7request)
+- [Psr7Response](#psr7response)
 
+## Setup
+
+```bash
+composer require contributte/psr7-http-message
+```
 
 ## `Psr7Request`
 
