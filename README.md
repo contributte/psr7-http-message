@@ -22,11 +22,12 @@
 
 ## Versions
 
-| State       | Version   | Branch   | PHP      |
-|-------------|-----------|----------|----------|
-| development | `^0.6.0`  | `master` | `>= 7.1` |
-| stable      | `^0.5.0`  | `master` | `>= 7.1` |
-| stable      | `^0.3.0`  | `master` | `>= 5.6` |
+| State       | Version | Branch   | Nette | PHP     |
+|-------------|---------|----------|-------|---------|
+| dev         | `^0.7`  | `master` | 3.0+  | `^7.2`  |
+| stable      | `^0.6`  | `master` | 3.0+  | `^7.2`  |
+| stable      | `^0.5`  | `master` | 2.4   | `>=7.1` |
+| stable      | `^0.3`  | `master` | 2.4   | `>=5.6` |
 
 ## Maintainers
 

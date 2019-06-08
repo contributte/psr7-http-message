@@ -11,9 +11,6 @@ use Nette\DI\CompilerExtension;
 class Psr7HttpExtension extends CompilerExtension
 {
 
-	/**
-	 * Register services
-	 */
 	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();

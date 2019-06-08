@@ -25,7 +25,6 @@ test(function (): void {
 test(function (): void {
 	$nette = new Request(
 		new UrlScript('https://nette.org'),
-		null,
 		['foo' => 'bar']
 	);
 	$request = Psr7ServerRequestFactory::fromNette($nette);
@@ -36,7 +35,6 @@ test(function (): void {
 test(function (): void {
 	$nette = new Request(
 		new UrlScript('https://nette.org'),
-		null,
 		null,
 		null,
 		null,
@@ -71,7 +69,6 @@ test(function (): void {
 	file_put_contents(TMP_DIR . '/fake.txt', 'foobar');
 	$nette = new Request(
 		new UrlScript('https://nette.org'),
-		null,
 		null,
 		[new FileUpload(['name' => 'fake.txt', 'type' => 'foo', 'size' => 10, 'tmp_name' => TMP_DIR . '/fake.txt', 'error' => 0])]
 	);

@@ -23,7 +23,7 @@ class Psr7RequestFactory
 			Psr7UriFactory::fromNette($request->getUrl()),
 			$request->getHeaders(),
 			stream_for($request->getRawBody()),
-			str_replace('HTTP/', '', $request->getHeader('SERVER_PROTOCOL', '1.1') ?? '')
+			str_replace('HTTP/', '', $request->getHeader('SERVER_PROTOCOL') ?? '1.1')
 		);
 
 		// Nette-compatibility
