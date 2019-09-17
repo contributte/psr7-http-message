@@ -47,20 +47,20 @@ trait ExtraResponseTrait
 	 * @param mixed[] $data
 	 * @return static
 	 */
-	public function writeJsonBody(array $data)
+	public function writeJsonBody(array $data, int $flags = 0)
 	{
 		return $this
-			->writeBody(json_encode($data))
+			->writeBody(json_encode($data, $flags))
 			->withHeader('Content-Type', 'application/json');
 	}
 
 	/**
 	 * @return static
 	 */
-	public function writeJsonObject(JsonSerializable $object)
+	public function writeJsonObject(JsonSerializable $object, int $flags = 0)
 	{
 		return $this
-			->writeBody(json_encode($object))
+			->writeBody(json_encode($object, $flags))
 			->withHeader('Content-Type', 'application/json');
 	}
 
