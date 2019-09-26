@@ -4,6 +4,7 @@ namespace Contributte\Psr7\Extra;
 
 use Contributte\Psr7\Psr7Stream;
 use JsonSerializable;
+use Nette\Utils\Json;
 
 /**
  * @method Psr7Stream getBody()
@@ -50,7 +51,7 @@ trait ExtraResponseTrait
 	public function writeJsonBody(array $data)
 	{
 		return $this
-			->writeBody(json_encode($data))
+			->writeBody(Json::encode($data))
 			->withHeader('Content-Type', 'application/json');
 	}
 
@@ -60,7 +61,7 @@ trait ExtraResponseTrait
 	public function writeJsonObject(JsonSerializable $object)
 	{
 		return $this
-			->writeBody(json_encode($object))
+			->writeBody(Json::encode($object))
 			->withHeader('Content-Type', 'application/json');
 	}
 
@@ -69,7 +70,7 @@ trait ExtraResponseTrait
 	 */
 	public function getJsonBody(bool $assoc = true)
 	{
-		return json_decode($this->getContents(), $assoc);
+		return Json::decode($this->getContents(), $assoc ? Json::FORCE_ARRAY : 0);
 	}
 
 	/**

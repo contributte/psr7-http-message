@@ -4,6 +4,7 @@ namespace Contributte\Psr7\Extra;
 
 use Contributte\Psr7\Psr7Stream;
 use Contributte\Psr7\Psr7Uri;
+use Nette\Utils\Json;
 
 /**
  * @method Psr7Stream getBody()
@@ -39,7 +40,7 @@ trait ExtraRequestTrait
 	 */
 	public function getJsonBody(bool $assoc = true)
 	{
-		return json_decode((string) $this->getBody(), $assoc);
+		return Json::decode((string) $this->getBody(), $assoc ? Json::FORCE_ARRAY : 0);
 	}
 
 	/**

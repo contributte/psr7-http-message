@@ -56,12 +56,26 @@ test(function (): void {
 	Assert::equal(['foo' => 'bar'], $response->getJsonBody());
 });
 
+test(function (): void {
+	$response = Psr7ResponseFactory::fromGlobal();
+
+	$response = $response->writeJsonBody(['foo' => 'ěščřžýáíé']);
+	Assert::equal(['foo' => 'ěščřžýáíé'], $response->getJsonBody());
+});
+
 // writeJsonObject
 test(function (): void {
 	$response = Psr7ResponseFactory::fromGlobal();
 	$jsonObject = new JsonObject('bar');
 	$response = $response->writeJsonObject($jsonObject);
 	Assert::equal(['foo' => 'bar'], $response->getJsonBody());
+});
+
+test(function (): void {
+	$response = Psr7ResponseFactory::fromGlobal();
+	$jsonObject = new JsonObject('ěščřžýáíé');
+	$response = $response->writeJsonObject($jsonObject);
+	Assert::equal(['foo' => 'ěščřžýáíé'], $response->getJsonBody());
 });
 
 // appendBody

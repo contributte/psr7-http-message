@@ -20,7 +20,8 @@
   ],
   "require": {
     "php": "^7.2",
-    "guzzlehttp/psr7": "^1.5.2"
+    "guzzlehttp/psr7": "^1.5.2",
+    "nette/utils": "~3.0.0"
   },
   "require-dev": {
     "nette/application": "~3.0.0",
