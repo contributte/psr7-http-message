@@ -11,12 +11,7 @@ class Psr7UriFactory
 	{
 		$uri = $url->getAbsoluteUrl();
 
-		if ($uri === 'http:///' && PHP_SAPI === 'cli') {
-			$psr7 = new Psr7Uri();
-		} else {
-			$psr7 = new Psr7Uri($uri);
-		}
-
+		$psr7 = $uri === 'http:///' && PHP_SAPI === 'cli' ? new Psr7Uri() : new Psr7Uri($uri);
 		$psr7 = $psr7->withUrlScript($url);
 
 		return $psr7;
