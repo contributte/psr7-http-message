@@ -18,7 +18,7 @@ class Psr7ServerRequestFactory
 	{
 		$requestFactory = new RequestFactory();
 
-		return self::fromNette($requestFactory->createHttpRequest());
+		return self::fromNette($requestFactory->fromGlobals());
 	}
 
 	public static function fromNette(IRequest $request): Psr7ServerRequest

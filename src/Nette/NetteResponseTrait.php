@@ -106,7 +106,7 @@ trait NetteResponseTrait
 			throw new InvalidStateException(sprintf('Cannot send response without %s', Application::class));
 		}
 
-		$this->applicationResponse->send((new RequestFactory())->createHttpRequest(), $this->httpResponse);
+		$this->applicationResponse->send((new RequestFactory())->fromGlobals(), $this->httpResponse);
 	}
 
 }
