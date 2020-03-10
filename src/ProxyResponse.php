@@ -88,9 +88,10 @@ class ProxyResponse implements ResponseInterface
 	 */
 	public function withHeader($name, $value): self
 	{
-		$this->inner = $this->inner->withHeader($name, $value);
+		$new = clone $this;
+		$new->inner = $this->inner->withHeader($name, $value);
 
-		return $this;
+		return $new;
 	}
 
 	/**
