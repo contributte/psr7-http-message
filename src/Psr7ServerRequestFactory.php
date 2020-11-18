@@ -2,9 +2,9 @@
 
 namespace Contributte\Psr7;
 
+use GuzzleHttp\Psr7\Utils;
 use Nette\Http\IRequest;
 use Nette\Http\RequestFactory;
-use function GuzzleHttp\Psr7\stream_for;
 
 class Psr7ServerRequestFactory
 {
@@ -27,7 +27,7 @@ class Psr7ServerRequestFactory
 			$request->getMethod(),
 			Psr7UriFactory::fromNette($request->getUrl()),
 			$request->getHeaders(),
-			stream_for($request->getRawBody()),
+			Utils::streamFor($request->getRawBody()),
 			str_replace('HTTP/', '', $request->getHeader('SERVER_PROTOCOL') ?? '1.1'),
 			$_SERVER
 		);
