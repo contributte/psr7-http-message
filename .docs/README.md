@@ -87,7 +87,7 @@ You can fill [`httpResponse`](https://api.nette.org/2.4/Nette.Http.Response.html
 ```php
 use Contributte\Psr7\Psr7ResponseFactory;
 
-$psr7 = Psr7RequestFactory::fromGlobal();
+$psr7 = Psr7ResponseFactory::fromGlobal();
 $psr7 = $psr7->withHttpResponse($httpResponse);
 $psr7 = $psr7->withApplicationResponse($applicationResponse);
 ```
