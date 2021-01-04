@@ -242,7 +242,7 @@ class Psr7RequestWrapper implements ServerRequestInterface
 	}
 
 	/**
-	 * @param UploadedFileInterface[] $uploadedFiles
+	 * @param UploadedFileInterface[]|mixed[] $uploadedFiles
 	 * @return static
 	 */
 	public function withUploadedFiles(array $uploadedFiles): self

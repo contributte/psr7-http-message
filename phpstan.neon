@@ -1,10 +1,9 @@
+includes:
+	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
+	- vendor/phpstan/phpstan-nette/extension.neon
+	- vendor/phpstan/phpstan-nette/rules.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+
 parameters:
 	ignoreErrors:
-		# Psr7ServerRequest::normalizeNetteFiles validate if invalid data are not given, so there is mismatch between parameters and code
-		- '#^Strict comparison using === between null and null will always evaluate to true\.$#'
-
-		# Nette\Http\FileUpload is created from string values of request -> it is string
-		- "#^Casting to int something that's already int\\.$#"
-
-		# Guess who needs better typehint. Yes, psr-7
-		- '#Parameter \#1 \$uploadedFiles \(array\<Psr\\Http\\Message\\UploadedFileInterface\>\) of method .+\:\:withUploadedFiles\(\) should be contravariant with parameter \$uploadedFiles \(array\) of method Psr\\Http\\Message\\ServerRequestInterface\:\:withUploadedFiles\(\)#'
+		- '#^Unsafe usage of new static\(\)\.$#'

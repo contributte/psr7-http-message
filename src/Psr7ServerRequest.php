@@ -20,7 +20,7 @@ class Psr7ServerRequest extends ServerRequest
 	use ExtraServerRequestTrait;
 
 	/**
-	 * @param FileUpload[]|FileUpload[][]|null[]|null[][] $files
+	 * @param FileUpload[]|FileUpload[][]|mixed[]|mixed[][] $files
 	 * @return Psr7UploadedFile[]
 	 */
 	public static function normalizeNetteFiles(array $files): array
@@ -31,7 +31,7 @@ class Psr7ServerRequest extends ServerRequest
 			if ($file instanceof FileUpload) {
 				$normalized[] = new Psr7UploadedFile(
 					$file->getTemporaryFile(),
-					(int) $file->getSize(),
+					$file->getSize(),
 					$file->getError(),
 					$file->getName(),
 					$file->getContentType()
