@@ -24,9 +24,9 @@
     "nette/utils": "^3.0.0"
   },
   "require-dev": {
-    "nette/application": "~3.0.0",
-    "nette/di": "~3.0.0",
-    "nette/http": "~3.0.3",
+    "nette/application": "^3.0.0",
+    "nette/di": "^3.0.7",
+    "nette/http": "^3.0.5",
     "ninjify/nunjuck": "^0.4",
     "ninjify/qa": "^0.12",
     "phpstan/phpstan": "^0.12",
@@ -35,8 +35,8 @@
     "phpstan/phpstan-strict-rules": "^0.12"
   },
   "conflict": {
-    "nette/di": "<3.0.0",
-    "nette/http": "<3.0.3"
+    "nette/di": "<3.0.7",
+    "nette/http": "<3.0.5"
   },
   "suggest": {
     "nette/di": "to use Psr7HttpExtension[CompilerExtension]",
