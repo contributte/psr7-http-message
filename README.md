@@ -20,10 +20,10 @@
 
 ## Usage
 
-To install latest version of `contributte/psr7-http-message` use [Composer](https://getcomposer.com).
+To install latest version of `contributte/psr7-http-message` use [Composer](https://getcomposer.org).
 
 ```
-composer require contributte/psr7-http-message
+$ composer require contributte/psr7-http-message
 ```
 
 ## Documentation
@@ -49,5 +49,5 @@ See [how to contribute](https://contributte.org) to this package. This package i
 
 -----
 
-Consider to [support](https://contributte.com/partners) **contributte** development team.
+Consider to [support](https://contributte.org/partners) **contributte** development team.
 Also thank you for using this package.
