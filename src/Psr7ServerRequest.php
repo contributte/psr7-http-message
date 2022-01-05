@@ -33,7 +33,7 @@ class Psr7ServerRequest extends ServerRequest
 					$file->getTemporaryFile(),
 					$file->getSize(),
 					$file->getError(),
-					$file->getName(),
+					$file->getUntrustedName(),
 					$file->getContentType()
 				);
 			} elseif (is_array($file)) {
