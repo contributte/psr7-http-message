@@ -20,7 +20,7 @@
 
 ## Usage
 
-To install latest version of `contributte/psr7-http-message` use [Composer](https://getcomposer.com).
+To install latest version of `contributte/psr7-http-message` use [Composer](https://getcomposer.org).
 
 ```bash
 composer require contributte/psr7-http-message
