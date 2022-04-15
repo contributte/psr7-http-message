@@ -13,10 +13,10 @@ trait ExtraResponseTrait
 {
 
 	/**
-	 * @param mixed $body
+	 * @param string $body
 	 * @return static
 	 */
-	public function appendBody($body)
+	public function appendBody(string $body): self
 	{
 		$this->getBody()->write($body);
 
@@ -26,7 +26,7 @@ trait ExtraResponseTrait
 	/**
 	 * @return static
 	 */
-	public function rewindBody()
+	public function rewindBody(): self
 	{
 		$this->getBody()->rewind();
 
@@ -34,10 +34,10 @@ trait ExtraResponseTrait
 	}
 
 	/**
-	 * @param mixed $body
+	 * @param string $body
 	 * @return static
 	 */
-	public function writeBody($body)
+	public function writeBody(string $body): self
 	{
 		$this->getBody()->write($body);
 
@@ -48,7 +48,7 @@ trait ExtraResponseTrait
 	 * @param mixed[] $data
 	 * @return static
 	 */
-	public function writeJsonBody(array $data)
+	public function writeJsonBody(array $data): self
 	{
 		return $this
 			->writeBody(Json::encode($data))
@@ -58,7 +58,7 @@ trait ExtraResponseTrait
 	/**
 	 * @return static
 	 */
-	public function writeJsonObject(JsonSerializable $object)
+	public function writeJsonObject(JsonSerializable $object): self
 	{
 		return $this
 			->writeBody(Json::encode($object))
@@ -74,9 +74,9 @@ trait ExtraResponseTrait
 	}
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
-	public function getContents(bool $rewind = true)
+	public function getContents(bool $rewind = true): string
 	{
 		if ($rewind === true) {
 			$this->rewindBody();
@@ -93,7 +93,7 @@ trait ExtraResponseTrait
 	 * @param string[]|string[][] $headers
 	 * @return static
 	 */
-	public function withHeaders(array $headers)
+	public function withHeaders(array $headers): self
 	{
 		$new = clone $this;
 		foreach ($headers as $key => $value) {
