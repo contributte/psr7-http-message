@@ -17,17 +17,17 @@ trait ExtraRequestTrait
 	 */
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
-	public function getContents()
+	public function getContents(): string
 	{
 		return $this->getBody()->getContents();
 	}
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
-	public function getContentsCopy()
+	public function getContentsCopy(): string
 	{
 		$contents = $this->getContents();
 		$this->getBody()->rewind();
@@ -40,7 +40,7 @@ trait ExtraRequestTrait
 	 */
 	public function getJsonBody(bool $assoc = true)
 	{
-		return Json::decode((string) $this->getBody(), $assoc ? Json::FORCE_ARRAY : 0);
+		return Json::decode($this->getContents(), $assoc ? Json::FORCE_ARRAY : 0);
 	}
 
 	/**
@@ -61,7 +61,7 @@ trait ExtraRequestTrait
 	/**
 	 * @return static
 	 */
-	public function withNewUri(string $uri)
+	public function withNewUri(string $uri): self
 	{
 		return $this->withUri(new Psr7Uri($uri));
 	}

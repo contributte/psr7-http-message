@@ -20,19 +20,19 @@
   ],
   "require": {
     "php": ">=7.2",
-    "guzzlehttp/psr7": "^1.7.0",
+    "guzzlehttp/psr7": "^1.7.0 || ^2.1.0",
     "nette/utils": "^3.0.0"
   },
   "require-dev": {
     "nette/application": "^3.0.0",
     "nette/di": "^3.0.7",
     "nette/http": "^3.0.5",
-    "ninjify/nunjuck": "^0.4",
-    "ninjify/qa": "^0.12",
-    "phpstan/phpstan": "^0.12",
-    "phpstan/phpstan-deprecation-rules": "^0.12",
-    "phpstan/phpstan-nette": "^0.12",
-    "phpstan/phpstan-strict-rules": "^0.12"
+    "ninjify/nunjuck": "^v0.3.0",
+    "ninjify/qa": "^v0.13.0",
+    "phpstan/phpstan": "^1.5.5",
+    "phpstan/phpstan-deprecation-rules": "^1.0.0",
+    "phpstan/phpstan-nette": "^1.0.0",
+    "phpstan/phpstan-strict-rules": "^1.1.0"
   },
   "conflict": {
     "nette/di": "<3.0.7",
@@ -56,7 +56,10 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "extra": {
     "branch-alias": {
