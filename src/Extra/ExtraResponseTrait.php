@@ -16,7 +16,7 @@ trait ExtraResponseTrait
 	 * @param string $body
 	 * @return static
 	 */
-	public function appendBody(string $body): self
+	public function appendBody(string $body)
 	{
 		$this->getBody()->write($body);
 
@@ -26,7 +26,7 @@ trait ExtraResponseTrait
 	/**
 	 * @return static
 	 */
-	public function rewindBody(): self
+	public function rewindBody()
 	{
 		$this->getBody()->rewind();
 
@@ -37,7 +37,7 @@ trait ExtraResponseTrait
 	 * @param string $body
 	 * @return static
 	 */
-	public function writeBody(string $body): self
+	public function writeBody(string $body)
 	{
 		$this->getBody()->write($body);
 
@@ -48,7 +48,7 @@ trait ExtraResponseTrait
 	 * @param mixed[] $data
 	 * @return static
 	 */
-	public function writeJsonBody(array $data): self
+	public function writeJsonBody(array $data)
 	{
 		return $this
 			->writeBody(Json::encode($data))
@@ -58,7 +58,7 @@ trait ExtraResponseTrait
 	/**
 	 * @return static
 	 */
-	public function writeJsonObject(JsonSerializable $object): self
+	public function writeJsonObject(JsonSerializable $object)
 	{
 		return $this
 			->writeBody(Json::encode($object))
@@ -93,7 +93,7 @@ trait ExtraResponseTrait
 	 * @param string[]|string[][] $headers
 	 * @return static
 	 */
-	public function withHeaders(array $headers): self
+	public function withHeaders(array $headers)
 	{
 		$new = clone $this;
 		foreach ($headers as $key => $value) {
