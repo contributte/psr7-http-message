@@ -61,7 +61,7 @@ trait ExtraRequestTrait
 	/**
 	 * @return static
 	 */
-	public function withNewUri(string $uri): self
+	public function withNewUri(string $uri)
 	{
 		return $this->withUri(new Psr7Uri($uri));
 	}
