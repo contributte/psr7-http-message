@@ -43,9 +43,6 @@ test(function (): void {
 
 	$response->writeBody('BAR');
 	Assert::equal('FOOBAR', $response->getContents());
-
-	$response->writeBody(null);
-	Assert::equal('FOOBAR', $response->getContents());
 });
 
 // writeJsonBody

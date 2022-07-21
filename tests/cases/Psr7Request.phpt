@@ -7,10 +7,10 @@
 use Contributte\Psr7\Psr7Request;
 use Contributte\Psr7\Psr7RequestFactory;
 use Contributte\Psr7\Psr7Uri;
+use GuzzleHttp\Psr7\Utils;
 use Nette\Application\Request as ApplicationRequest;
 use Nette\Http\RequestFactory;
 use Tester\Assert;
-use function GuzzleHttp\Psr7\stream_for;
 
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -30,19 +30,38 @@ test(function (): void {
 // getContents
 test(function (): void {
 	$request = Psr7RequestFactory::fromGlobal()
-		->withBody(stream_for('FOOBAR'));
+		->withBody(Utils::streamFor('FOOBAR'));
 
 	Assert::equal('FOOBAR', $request->getContents());
+	Assert::equal('', $request->getContents());
+});
+
+// getContentsCopy
+test(function (): void {
+	$request = Psr7RequestFactory::fromGlobal()
+		->withBody(Utils::streamFor('FOOBAR'));
+
+	Assert::equal('FOOBAR', $request->getContentsCopy());
+	Assert::equal('FOOBAR', $request->getContentsCopy());
 });
 
 // getJsonBody
 test(function (): void {
 	$request = Psr7RequestFactory::fromGlobal()
-		->withBody(stream_for(json_encode(['foo' => 'bar'])));
+		->withBody(Utils::streamFor(json_encode(['foo' => 'bar'])));
 
 	Assert::equal(['foo' => 'bar'], $request->getJsonBody());
 	$request->getBody()->rewind();
 	Assert::equal((object) ['foo' => 'bar'], $request->getJsonBody(false));
+});
+
+// getJsonBodyCopy
+test(function (): void {
+	$request = Psr7RequestFactory::fromGlobal()
+		->withBody(Utils::streamFor(json_encode(['foo' => 'bar'])));
+
+	Assert::equal(['foo' => 'bar'], $request->getJsonBodyCopy(true));
+	Assert::equal((object) ['foo' => 'bar'], $request->getJsonBodyCopy(false));
 });
 
 // withNewUri

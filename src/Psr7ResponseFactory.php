@@ -2,7 +2,7 @@
 
 namespace Contributte\Psr7;
 
-use Nette\Http\IResponse;
+use Nette\Http\Response;
 
 class Psr7ResponseFactory
 {
@@ -12,7 +12,7 @@ class Psr7ResponseFactory
 		return new Psr7Response();
 	}
 
-	public static function fromNette(IResponse $response): Psr7Response
+	public static function fromNette(Response $response): Psr7Response
 	{
 		$psr7 = new Psr7Response();
 		$psr7 = $psr7

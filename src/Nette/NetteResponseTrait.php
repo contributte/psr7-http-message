@@ -4,21 +4,20 @@ namespace Contributte\Psr7\Nette;
 
 use Contributte\Psr7\Exception\Logical\InvalidStateException;
 use Nette\Application\Application;
-use Nette\Application\IResponse as IApplicationResponse;
-use Nette\Http\IResponse as IHttpResponse;
+use Nette\Application\Response as ApplicationResponse;
 use Nette\Http\RequestFactory;
-use Nette\Http\Response;
+use Nette\Http\Response as HttpResponse;
 
 trait NetteResponseTrait
 {
 
-	/** @var IHttpResponse|null */
+	/** @var HttpResponse|null */
 	protected $httpResponse;
 
-	/** @var IApplicationResponse|null */
+	/** @var ApplicationResponse|null */
 	protected $applicationResponse;
 
-	public function getHttpResponse(): ?IHttpResponse
+	public function getHttpResponse(): ?HttpResponse
 	{
 		return $this->httpResponse;
 	}
@@ -26,7 +25,7 @@ trait NetteResponseTrait
 	/**
 	 * @return static
 	 */
-	public function withHttpResponse(IHttpResponse $response)
+	public function withHttpResponse(HttpResponse $response)
 	{
 		$new = clone $this;
 		$new->httpResponse = $response;
@@ -39,7 +38,7 @@ trait NetteResponseTrait
 		return $this->httpResponse !== null;
 	}
 
-	public function getApplicationResponse(): ?IApplicationResponse
+	public function getApplicationResponse(): ?ApplicationResponse
 	{
 		return $this->applicationResponse;
 	}
@@ -47,7 +46,7 @@ trait NetteResponseTrait
 	/**
 	 * @return static
 	 */
-	public function withApplicationResponse(IApplicationResponse $response)
+	public function withApplicationResponse(ApplicationResponse $response)
 	{
 		$new = clone $this;
 		$new->applicationResponse = $response;
@@ -79,7 +78,7 @@ trait NetteResponseTrait
 	public function sendHeaders(): void
 	{
 		if ($this->httpResponse === null) {
-			throw new InvalidStateException(sprintf('Cannot send response without %s', Response::class));
+			throw new InvalidStateException(sprintf('Cannot send response without %s', HttpResponse::class));
 		}
 
 		// Send status code
@@ -99,7 +98,7 @@ trait NetteResponseTrait
 	public function sendBody(): void
 	{
 		if ($this->httpResponse === null) {
-			throw new InvalidStateException(sprintf('Cannot send response without %s', Response::class));
+			throw new InvalidStateException(sprintf('Cannot send response without %s', HttpResponse::class));
 		}
 
 		if ($this->applicationResponse === null) {
