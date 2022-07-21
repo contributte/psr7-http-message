@@ -11,7 +11,9 @@ class Psr7ServerRequestFactory
 
 	public static function fromSuperGlobal(): Psr7ServerRequest
 	{
-		return Psr7ServerRequest::fromGlobals();
+		$psr7 = Psr7ServerRequest::fromGlobals();
+		assert($psr7 instanceof Psr7ServerRequest);
+		return $psr7;
 	}
 
 	public static function fromGlobal(): Psr7ServerRequest
