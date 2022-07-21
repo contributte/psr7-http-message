@@ -78,9 +78,9 @@ class Psr7ServerRequest extends ServerRequest
 	 */
 
 	/**
-	 * @return static
+	 * @return ServerRequestInterface
 	 */
-	public static function fromGlobals(): self
+	public static function fromGlobals(): ServerRequestInterface
 	{
 		$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 		$headers = function_exists('getallheaders') ? getallheaders() : [];
