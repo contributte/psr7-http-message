@@ -5,8 +5,9 @@ namespace Contributte\Psr7\Nette;
 use Contributte\Psr7\Exception\Logical\InvalidStateException;
 use Nette\Application\Application;
 use Nette\Application\Response as ApplicationResponse;
+use Nette\Http\IResponse as HttpResponse;
 use Nette\Http\RequestFactory;
-use Nette\Http\Response as HttpResponse;
+use Nette\Http\Response;
 
 trait NetteResponseTrait
 {
@@ -78,7 +79,7 @@ trait NetteResponseTrait
 	public function sendHeaders(): void
 	{
 		if ($this->httpResponse === null) {
-			throw new InvalidStateException(sprintf('Cannot send response without %s', HttpResponse::class));
+			throw new InvalidStateException(sprintf('Cannot send response without %s', Response::class));
 		}
 
 		// Send status code
@@ -98,7 +99,7 @@ trait NetteResponseTrait
 	public function sendBody(): void
 	{
 		if ($this->httpResponse === null) {
-			throw new InvalidStateException(sprintf('Cannot send response without %s', HttpResponse::class));
+			throw new InvalidStateException(sprintf('Cannot send response without %s', Response::class));
 		}
 
 		if ($this->applicationResponse === null) {
