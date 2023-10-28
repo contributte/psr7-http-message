@@ -14,12 +14,10 @@ class ProxyResponse implements ResponseInterface
 
 	use ExtraResponseTrait;
 
-	/** @var ResponseInterface */
-	protected $inner;
-
-	public function __construct(ResponseInterface $inner)
+	public function __construct(
+		protected ResponseInterface $inner,
+	)
 	{
-		$this->inner = $inner;
 	}
 
 	public function getOriginalResponse(): ResponseInterface
@@ -27,20 +25,12 @@ class ProxyResponse implements ResponseInterface
 		return $this->inner;
 	}
 
-	/**
-	 * INTERFACE ***************************************************************
-	 */
-
 	public function getProtocolVersion(): string
 	{
 		return $this->inner->getProtocolVersion();
 	}
 
-	/**
-	 * @param string $version
-	 * @return static
-	 */
-	public function withProtocolVersion($version): self
+	public function withProtocolVersion(string $version): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withProtocolVersion($version);
@@ -56,37 +46,28 @@ class ProxyResponse implements ResponseInterface
 		return $this->inner->getHeaders();
 	}
 
-	/**
-	 * @param string $name
-	 */
-	public function hasHeader($name): bool
+	public function hasHeader(string $name): bool
 	{
 		return $this->inner->hasHeader($name);
 	}
 
 	/**
-	 * @param string $name
 	 * @return string[]
 	 */
-	public function getHeader($name): array
+	public function getHeader(string $name): array
 	{
 		return $this->inner->getHeader($name);
 	}
 
-	/**
-	 * @param string $name
-	 */
-	public function getHeaderLine($name): string
+	public function getHeaderLine(string $name): string
 	{
 		return $this->inner->getHeaderLine($name);
 	}
 
 	/**
-	 * @param string          $name
 	 * @param string|string[] $value
-	 * @return static
 	 */
-	public function withHeader($name, $value): self
+	public function withHeader(string $name, $value): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withHeader($name, $value);
@@ -95,11 +76,9 @@ class ProxyResponse implements ResponseInterface
 	}
 
 	/**
-	 * @param string          $name
 	 * @param string|string[] $value
-	 * @return static
 	 */
-	public function withAddedHeader($name, $value): self
+	public function withAddedHeader(string $name, $value): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withAddedHeader($name, $value);
@@ -107,11 +86,7 @@ class ProxyResponse implements ResponseInterface
 		return $new;
 	}
 
-	/**
-	 * @param string $name
-	 * @return static
-	 */
-	public function withoutHeader($name): self
+	public function withoutHeader(string $name): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withoutHeader($name);
@@ -124,10 +99,7 @@ class ProxyResponse implements ResponseInterface
 		return $this->inner->getBody();
 	}
 
-	/**
-	 * @return static
-	 */
-	public function withBody(StreamInterface $body): self
+	public function withBody(StreamInterface $body): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withBody($body);
@@ -140,12 +112,7 @@ class ProxyResponse implements ResponseInterface
 		return $this->inner->getStatusCode();
 	}
 
-	/**
-	 * @param int    $code
-	 * @param string $reasonPhrase
-	 * @return static
-	 */
-	public function withStatus($code, $reasonPhrase = ''): self
+	public function withStatus(int $code, string $reasonPhrase = ''): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withStatus($code, $reasonPhrase);

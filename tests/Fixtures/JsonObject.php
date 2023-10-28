@@ -7,12 +7,10 @@ use JsonSerializable;
 class JsonObject implements JsonSerializable
 {
 
-	/** @var string */
-	private $foo;
-
-	public function __construct(string $foo)
+	public function __construct(
+		private readonly string $foo,
+	)
 	{
-		$this->foo = $foo;
 	}
 
 	/**

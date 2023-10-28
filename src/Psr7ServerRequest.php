@@ -48,16 +48,9 @@ class Psr7ServerRequest extends ServerRequest
 		return $normalized;
 	}
 
-	/**
-	 * ATTRIBUTES **************************************************************
-	 */
-
-	/**
-	 * @return static
-	 */
-	public static function of(ServerRequestInterface $request): self
+	public static function of(ServerRequestInterface $request): ServerRequestInterface
 	{
-		$new = new static(
+		$new = new self(
 			$request->getMethod(),
 			$request->getUri(),
 			$request->getHeaders(),
@@ -73,13 +66,6 @@ class Psr7ServerRequest extends ServerRequest
 			->withQueryParams($request->getQueryParams());
 	}
 
-	/**
-	 * FACTORY *****************************************************************
-	 */
-
-	/**
-	 * @return ServerRequestInterface
-	 */
 	public static function fromGlobals(): ServerRequestInterface
 	{
 		$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
@@ -88,7 +74,7 @@ class Psr7ServerRequest extends ServerRequest
 		$body = new LazyOpenStream('php://input', 'r+');
 		$protocol = isset($_SERVER['SERVER_PROTOCOL']) ? str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1';
 
-		$serverRequest = new static($method, $uri, $headers, $body, $protocol, $_SERVER);
+		$serverRequest = new self($method, $uri, $headers, $body, $protocol, $_SERVER);
 
 		return $serverRequest
 			->withCookieParams($_COOKIE)
@@ -99,9 +85,8 @@ class Psr7ServerRequest extends ServerRequest
 
 	/**
 	 * @param mixed[] $attributes
-	 * @return static
 	 */
-	public function withAttributes(array $attributes): self
+	public function withAttributes(array $attributes): static
 	{
 		$new = $this;
 		foreach ($attributes as $key => $value) {

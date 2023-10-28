@@ -16,12 +16,10 @@ class ProxyRequest implements ServerRequestInterface
 
 	use ExtraServerRequestTrait;
 
-	/** @var ServerRequestInterface */
-	protected $inner;
-
-	public function __construct(ServerRequestInterface $request)
+	public function __construct(
+		protected ServerRequestInterface $inner,
+	)
 	{
-		$this->inner = $request;
 	}
 
 	public function getOriginalRequest(): ServerRequestInterface
@@ -29,20 +27,12 @@ class ProxyRequest implements ServerRequestInterface
 		return $this->inner;
 	}
 
-	/**
-	 * INTERFACE ***************************************************************
-	 */
-
 	public function getProtocolVersion(): string
 	{
 		return $this->inner->getProtocolVersion();
 	}
 
-	/**
-	 * @param string $version
-	 * @return static
-	 */
-	public function withProtocolVersion($version): self
+	public function withProtocolVersion(string $version): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withProtocolVersion($version);
@@ -58,37 +48,28 @@ class ProxyRequest implements ServerRequestInterface
 		return $this->inner->getHeaders();
 	}
 
-	/**
-	 * @param string $name
-	 */
-	public function hasHeader($name): bool
+	public function hasHeader(string $name): bool
 	{
 		return $this->inner->hasHeader($name);
 	}
 
 	/**
-	 * @param string $name
 	 * @return string[]
 	 */
-	public function getHeader($name): array
+	public function getHeader(string $name): array
 	{
 		return $this->inner->getHeader($name);
 	}
 
-	/**
-	 * @param string $name
-	 */
-	public function getHeaderLine($name): string
+	public function getHeaderLine(string $name): string
 	{
 		return $this->inner->getHeaderLine($name);
 	}
 
 	/**
-	 * @param string          $name
 	 * @param string|string[] $value
-	 * @return static
 	 */
-	public function withHeader($name, $value): self
+	public function withHeader(string $name, $value): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withHeader($name, $value);
@@ -97,11 +78,9 @@ class ProxyRequest implements ServerRequestInterface
 	}
 
 	/**
-	 * @param string          $name
 	 * @param string|string[] $value
-	 * @return static
 	 */
-	public function withAddedHeader($name, $value): self
+	public function withAddedHeader(string $name, $value): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withAddedHeader($name, $value);
@@ -109,11 +88,7 @@ class ProxyRequest implements ServerRequestInterface
 		return $new;
 	}
 
-	/**
-	 * @param string $name
-	 * @return static
-	 */
-	public function withoutHeader($name): self
+	public function withoutHeader(string $name): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withoutHeader($name);
@@ -126,10 +101,7 @@ class ProxyRequest implements ServerRequestInterface
 		return $this->inner->getBody();
 	}
 
-	/**
-	 * @return static
-	 */
-	public function withBody(StreamInterface $body): self
+	public function withBody(StreamInterface $body): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withBody($body);
@@ -142,11 +114,7 @@ class ProxyRequest implements ServerRequestInterface
 		return $this->inner->getRequestTarget();
 	}
 
-	/**
-	 * @param mixed $requestTarget
-	 * @return static
-	 */
-	public function withRequestTarget($requestTarget): self
+	public function withRequestTarget(string $requestTarget): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withRequestTarget($requestTarget);
@@ -159,11 +127,7 @@ class ProxyRequest implements ServerRequestInterface
 		return $this->inner->getMethod();
 	}
 
-	/**
-	 * @param string $method
-	 * @return static
-	 */
-	public function withMethod($method): self
+	public function withMethod(string $method): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withMethod($method);
@@ -176,11 +140,7 @@ class ProxyRequest implements ServerRequestInterface
 		return $this->inner->getUri();
 	}
 
-	/**
-	 * @param bool $preserveHost
-	 * @return static
-	 */
-	public function withUri(UriInterface $uri, $preserveHost = false): self
+	public function withUri(UriInterface $uri, bool $preserveHost = false): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withUri($uri, $preserveHost);
@@ -206,9 +166,8 @@ class ProxyRequest implements ServerRequestInterface
 
 	/**
 	 * @param mixed[] $cookies
-	 * @return static
 	 */
-	public function withCookieParams(array $cookies): self
+	public function withCookieParams(array $cookies): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withCookieParams($cookies);
@@ -226,9 +185,8 @@ class ProxyRequest implements ServerRequestInterface
 
 	/**
 	 * @param mixed[] $query
-	 * @return static
 	 */
-	public function withQueryParams(array $query): self
+	public function withQueryParams(array $query): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withQueryParams($query);
@@ -246,9 +204,8 @@ class ProxyRequest implements ServerRequestInterface
 
 	/**
 	 * @param UploadedFileInterface[]|mixed[] $uploadedFiles
-	 * @return static
 	 */
-	public function withUploadedFiles(array $uploadedFiles): self
+	public function withUploadedFiles(array $uploadedFiles): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withUploadedFiles($uploadedFiles);
@@ -266,9 +223,8 @@ class ProxyRequest implements ServerRequestInterface
 
 	/**
 	 * @param mixed[]|object|null $data
-	 * @return static
 	 */
-	public function withParsedBody($data): self
+	public function withParsedBody($data): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withParsedBody($data);
@@ -286,22 +242,19 @@ class ProxyRequest implements ServerRequestInterface
 
 	/**
 	 * @see getAttributes()
-	 * @param string $name
 	 * @param mixed  $default
 	 * @return mixed
 	 */
-	public function getAttribute($name, $default = null)
+	public function getAttribute(string $name, $default = null)
 	{
 		return $this->inner->getAttribute($name, $default);
 	}
 
 	/**
 	 * @see getAttributes()
-	 * @param string $name
 	 * @param mixed  $value
-	 * @return static
 	 */
-	public function withAttribute($name, $value): self
+	public function withAttribute(string $name, $value): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withAttribute($name, $value);
@@ -311,10 +264,8 @@ class ProxyRequest implements ServerRequestInterface
 
 	/**
 	 * @see getAttributes()
-	 * @param string $name
-	 * @return static
 	 */
-	public function withoutAttribute($name): self
+	public function withoutAttribute(string $name): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withoutAttribute($name);

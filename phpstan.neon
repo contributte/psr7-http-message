@@ -8,5 +8,3 @@ parameters:
 	level: 9
 	paths:
 		- src
-	ignoreErrors:
-		- '#^Unsafe usage of new static\(\)\.$#'

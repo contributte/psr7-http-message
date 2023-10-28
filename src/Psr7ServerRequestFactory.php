@@ -13,6 +13,7 @@ class Psr7ServerRequestFactory
 	{
 		$psr7 = Psr7ServerRequest::fromGlobals();
 		assert($psr7 instanceof Psr7ServerRequest);
+
 		return $psr7;
 	}
 

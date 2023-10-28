@@ -9,20 +9,12 @@ trait ExtraServerRequestTrait
 
 	use ExtraRequestTrait;
 
-	/**
-	 * QUERY PARAM *************************************************************
-	 */
-
 	public function hasQueryParam(string $name): bool
 	{
 		return array_key_exists($name, $this->getQueryParams());
 	}
 
-	/**
-	 * @param mixed $default
-	 * @return mixed
-	 */
-	public function getQueryParam(string $name, $default = null)
+	public function getQueryParam(string $name, mixed $default = null): mixed
 	{
 		if (!$this->hasQueryParam($name)) {
 			if (func_num_args() < 2) {

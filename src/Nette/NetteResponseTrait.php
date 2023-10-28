@@ -12,21 +12,16 @@ use Nette\Http\Response;
 trait NetteResponseTrait
 {
 
-	/** @var HttpResponse|null */
-	protected $httpResponse;
+	protected ?HttpResponse $httpResponse = null;
 
-	/** @var ApplicationResponse|null */
-	protected $applicationResponse;
+	protected ?ApplicationResponse $applicationResponse = null;
 
 	public function getHttpResponse(): ?HttpResponse
 	{
 		return $this->httpResponse;
 	}
 
-	/**
-	 * @return static
-	 */
-	public function withHttpResponse(HttpResponse $response)
+	public function withHttpResponse(HttpResponse $response): static
 	{
 		$new = clone $this;
 		$new->httpResponse = $response;
@@ -44,10 +39,7 @@ trait NetteResponseTrait
 		return $this->applicationResponse;
 	}
 
-	/**
-	 * @return static
-	 */
-	public function withApplicationResponse(ApplicationResponse $response)
+	public function withApplicationResponse(ApplicationResponse $response): static
 	{
 		$new = clone $this;
 		$new->applicationResponse = $response;

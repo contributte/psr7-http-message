@@ -13,13 +13,9 @@ class Psr7Response extends Response
 	use ExtraResponseTrait;
 	use NetteResponseTrait;
 
-	/**
-	 * FACTORY *****************************************************************
-	 */
-
-	public static function of(ResponseInterface $response): self
+	public static function of(ResponseInterface $response): ResponseInterface
 	{
-		return new static(
+		return new self(
 			$response->getStatusCode(),
 			$response->getHeaders(),
 			$response->getBody(),
@@ -28,9 +24,9 @@ class Psr7Response extends Response
 		);
 	}
 
-	public static function fromGlobals(): self
+	public static function fromGlobals(): ResponseInterface
 	{
-		return new static();
+		return new self();
 	}
 
 }

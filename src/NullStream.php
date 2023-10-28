@@ -24,6 +24,7 @@ class NullStream implements StreamInterface
 	public function detach()
 	{
 		$this->close();
+
 		return null;
 	}
 
@@ -51,11 +52,7 @@ class NullStream implements StreamInterface
 	{
 	}
 
-	/**
-	 * @param int $offset
-	 * @param int $whence
-	 */
-	public function seek($offset, $whence = SEEK_SET): void
+	public function seek(int $offset, int $whence = SEEK_SET): void
 	{
 	}
 
@@ -69,27 +66,20 @@ class NullStream implements StreamInterface
 		throw new RuntimeException('Null streams cannot tell position');
 	}
 
-	/**
-	 * @param int $length
-	 */
-	public function read($length): string
+	public function read(int $length): string
 	{
 		throw new RuntimeException('Null streams cannot read');
 	}
 
-	/**
-	 * @param mixed $data
-	 */
-	public function write($data): int
+	public function write(string $data): int
 	{
 		throw new RuntimeException('Null streams cannot write');
 	}
 
 	/**
-	 * @param string|null $key
 	 * @return null
 	 */
-	public function getMetadata($key = null)
+	public function getMetadata(?string $key = null)
 	{
 		return null;
 	}
