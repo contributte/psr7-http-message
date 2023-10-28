@@ -19,20 +19,21 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
-    "guzzlehttp/psr7": "^2.4.3",
-    "nette/utils": "^3.2.8"
+    "php": ">=8.1",
+    "guzzlehttp/psr7": "^2.6.1",
+    "nette/utils": "^v4.0.2"
   },
   "require-dev": {
-    "nette/application": "^3.1.8",
-    "nette/di": "^3.0.14",
-    "nette/http": "^3.2.1",
-    "ninjify/nunjuck": "^0.4",
-    "ninjify/qa": "^0.13",
-    "phpstan/phpstan": "^1.9.3",
-    "phpstan/phpstan-deprecation-rules": "^1.1.0",
-    "phpstan/phpstan-nette": "^1.1.0",
-    "phpstan/phpstan-strict-rules": "^1.4.4"
+    "contributte/dev": "^v0.4",
+    "contributte/qa": "^v0.3.1",
+    "contributte/tester": "^v0.2.0",
+    "nette/application": "^v3.1.14",
+    "nette/di": "^v3.1.7",
+    "nette/http": "^v3.2.2",
+    "phpstan/phpstan": "^1.10.39",
+    "phpstan/phpstan-deprecation-rules": "^1.1.4",
+    "phpstan/phpstan-nette": "^1.2.9",
+    "phpstan/phpstan-strict-rules": "^1.5.1"
   },
   "conflict": {
     "nette/di": "<3.0.7",
@@ -50,7 +51,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Fixtures\\": "tests/fixtures"
+      "Tests\\": "tests"
     }
   },
   "minimum-stability": "dev",

@@ -13,16 +13,9 @@ class Psr7Request extends Request
 	use ExtraRequestTrait;
 	use NetteRequestTrait;
 
-	/**
-	 * FACTORY *****************************************************************
-	 */
-
-	/**
-	 * @return static
-	 */
-	public static function of(RequestInterface $request): self
+	public static function of(RequestInterface $request): RequestInterface
 	{
-		$new = new static(
+		$new = new self(
 			$request->getMethod(),
 			$request->getUri(),
 			$request->getHeaders(),

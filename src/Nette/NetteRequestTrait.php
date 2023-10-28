@@ -8,21 +8,16 @@ use Nette\Http\IRequest as HttpRequest;
 trait NetteRequestTrait
 {
 
-	/** @var HttpRequest */
-	protected $httpRequest;
+	protected HttpRequest $httpRequest;
 
-	/** @var ApplicationRequest */
-	protected $applicationRequest;
+	protected ApplicationRequest $applicationRequest;
 
 	public function getHttpRequest(): HttpRequest
 	{
 		return $this->httpRequest;
 	}
 
-	/**
-	 * @return static
-	 */
-	public function withHttpRequest(HttpRequest $request)
+	public function withHttpRequest(HttpRequest $request): static
 	{
 		$new = clone $this;
 		$new->httpRequest = $request;
@@ -35,10 +30,7 @@ trait NetteRequestTrait
 		return $this->applicationRequest;
 	}
 
-	/**
-	 * @return static
-	 */
-	public function withApplicationRequest(ApplicationRequest $request)
+	public function withApplicationRequest(ApplicationRequest $request): static
 	{
 		$new = clone $this;
 		$new->applicationRequest = $request;

@@ -12,32 +12,21 @@ use Nette\Utils\Json;
 trait ExtraResponseTrait
 {
 
-	/**
-	 * @param string $body
-	 * @return static
-	 */
-	public function appendBody(string $body)
+	public function appendBody(string $body): static
 	{
 		$this->getBody()->write($body);
 
 		return $this;
 	}
 
-	/**
-	 * @return static
-	 */
-	public function rewindBody()
+	public function rewindBody(): static
 	{
 		$this->getBody()->rewind();
 
 		return $this;
 	}
 
-	/**
-	 * @param string $body
-	 * @return static
-	 */
-	public function writeBody(string $body)
+	public function writeBody(string $body): static
 	{
 		$this->getBody()->write($body);
 
@@ -46,54 +35,43 @@ trait ExtraResponseTrait
 
 	/**
 	 * @param mixed[] $data
-	 * @return static
 	 */
-	public function writeJsonBody(array $data)
+	public function writeJsonBody(array $data): static
 	{
 		return $this
 			->writeBody(Json::encode($data))
 			->withHeader('Content-Type', 'application/json');
 	}
 
-	/**
-	 * @return static
-	 */
-	public function writeJsonObject(JsonSerializable $object)
+	public function writeJsonObject(JsonSerializable $object): static
 	{
 		return $this
 			->writeBody(Json::encode($object))
 			->withHeader('Content-Type', 'application/json');
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getJsonBody(bool $assoc = true)
+	public function getJsonBody(bool $assoc = true): mixed
 	{
-		return Json::decode($this->getContents(), $assoc ? Json::FORCE_ARRAY : 0);
+		return Json::decode($this->getContents(), forceArrays: $assoc);
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getContents(bool $rewind = true): string
 	{
-		if ($rewind === true) {
+		if ($rewind) {
 			$this->rewindBody();
 		}
 
 		return $this->getBody()->getContents();
 	}
 
-	/**
+	/*
 	 * HEADERS ****************************************************************
 	 */
 
 	/**
 	 * @param string[]|string[][] $headers
-	 * @return static
 	 */
-	public function withHeaders(array $headers)
+	public function withHeaders(array $headers): static
 	{
 		$new = clone $this;
 		foreach ($headers as $key => $value) {

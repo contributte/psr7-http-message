@@ -8,18 +8,14 @@ use Nette\Http\UrlScript;
 class Psr7Uri extends Uri
 {
 
-	/** @var UrlScript */
-	protected $urlScript;
+	protected UrlScript $urlScript;
 
 	public function getUrlScript(): UrlScript
 	{
 		return $this->urlScript;
 	}
 
-	/**
-	 * @return static
-	 */
-	public function withUrlScript(UrlScript $url): self
+	public function withUrlScript(UrlScript $url): static
 	{
 		$new = clone $this;
 		$new->urlScript = $url;

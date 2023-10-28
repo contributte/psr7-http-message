@@ -12,21 +12,11 @@ use Nette\Utils\Json;
 trait ExtraRequestTrait
 {
 
-	/**
-	 * BODY ********************************************************************
-	 */
-
-	/**
-	 * @return string
-	 */
 	public function getContents(): string
 	{
 		return $this->getBody()->getContents();
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getContentsCopy(): string
 	{
 		$contents = $this->getContents();
@@ -35,18 +25,12 @@ trait ExtraRequestTrait
 		return $contents;
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getJsonBody(bool $assoc = true)
+	public function getJsonBody(bool $assoc = true): mixed
 	{
-		return Json::decode($this->getContents(), $assoc ? Json::FORCE_ARRAY : 0);
+		return Json::decode($this->getContents(), forceArrays: $assoc);
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getJsonBodyCopy(bool $assoc = true)
+	public function getJsonBodyCopy(bool $assoc = true): mixed
 	{
 		$contents = $this->getJsonBody($assoc);
 		$this->getBody()->rewind();
@@ -54,14 +38,7 @@ trait ExtraRequestTrait
 		return $contents;
 	}
 
-	/**
-	 * URI *********************************************************************
-	 */
-
-	/**
-	 * @return static
-	 */
-	public function withNewUri(string $uri)
+	public function withNewUri(string $uri): static
 	{
 		return $this->withUri(new Psr7Uri($uri));
 	}
