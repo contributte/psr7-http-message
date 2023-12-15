@@ -1,49 +1,35 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="Contributte" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
-	<description>Contributte</description>
+	<!-- Rulesets -->
+	<rule ref="./vendor/contributte/qa/ruleset-8.0.xml"/>
 
-	<!-- Extending rulesets -->
-	<rule ref="./vendor/contributte/qa/ruleset-8.1.xml"/>
-
-	<!-- Specific rules -->
+	<!-- Rules -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
 				<element key="src" value="Contributte\Psr7"/>
 				<element key="tests" value="Tests"/>
 			</property>
+			<property name="extensions" type="array">
+				<element key="php" value="php"/>
+				<element key="phpt" value="phpt"/>
+			</property>
 		</properties>
 	</rule>
 
-	<rule ref="SlevomatCodingStandard.Classes.SuperfluousTraitNaming.SuperfluousSuffix">
-		<exclude name="SlevomatCodingStandard.Classes.SuperfluousTraitNaming.SuperfluousSuffix"/>
+	<rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable">
+		<exclude-pattern>src/**</exclude-pattern>
+		<exclude-pattern>tests/**</exclude-pattern>
 	</rule>
 
-	<rule ref="SlevomatCodingStandard.Functions.DisallowEmptyFunction.EmptyFunction">
-		<exclude-pattern>src/NullStream.php</exclude-pattern>
+	<rule ref="SlevomatCodingStandard.Classes.SuperfluousTraitNaming.SuperfluousSuffix">
+		<exclude-pattern>src/**/*Trait.php</exclude-pattern>
 	</rule>
 
 	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint">
-		<exclude-pattern>src/Psr7RequestWrapper.php</exclude-pattern>
-		<exclude-pattern>src/Psr7ResponseWrapper.php</exclude-pattern>
-		<exclude-pattern>src/ProxyRequest.php</exclude-pattern>
-		<exclude-pattern>src/ProxyResponse.php</exclude-pattern>
+		<exclude-pattern>src</exclude-pattern>
 	</rule>
 
-	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint.MissingNativeTypeHint">
-		<exclude-pattern>src/Psr7RequestWrapper.php</exclude-pattern>
-		<exclude-pattern>src/ProxyRequest.php</exclude-pattern>
-		<exclude-pattern>src/ProxyResponse.php</exclude-pattern>
-	</rule>
-
-	<rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable">
-		<exclude-pattern>src/Psr7ServerRequest.php</exclude-pattern>
-		<exclude-pattern>src/Psr7ServerRequestFactory.php</exclude-pattern>
-		<exclude-pattern>tests/Cases/Psr7ServerRequestFactoryTest.php</exclude-pattern>
-		<exclude-pattern>tests/Cases/Psr7ServerRequestTest.php</exclude-pattern>
-	</rule>
-
-	<!-- Exclude folders -->
+	<!-- Excludes -->
 	<exclude-pattern>/tests/tmp</exclude-pattern>
 </ruleset>
-

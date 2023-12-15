@@ -24,16 +24,12 @@
     "nette/utils": "^v4.0.2"
   },
   "require-dev": {
-    "contributte/dev": "^v0.4",
-    "contributte/qa": "^v0.3.1",
-    "contributte/tester": "^v0.2.0",
+    "contributte/qa": "^0.3.1",
+    "contributte/tester": "^0.2.0",
+    "contributte/phpstan": "^0.1",
     "nette/application": "^v3.1.14",
-    "nette/di": "^v3.1.7",
-    "nette/http": "^v3.2.2",
-    "phpstan/phpstan": "^1.10.39",
-    "phpstan/phpstan-deprecation-rules": "^1.1.4",
-    "phpstan/phpstan-nette": "^1.2.9",
-    "phpstan/phpstan-strict-rules": "^1.5.1"
+    "nette/di": "^3.1.8",
+    "nette/http": "^3.2.3"
   },
   "conflict": {
     "nette/di": "<3.0.7",
