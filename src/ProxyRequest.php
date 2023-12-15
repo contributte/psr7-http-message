@@ -216,7 +216,7 @@ class ProxyRequest implements ServerRequestInterface
 	/**
 	 * @return mixed[]|object|null
 	 */
-	public function getParsedBody()
+	public function getParsedBody(): array|object|null
 	{
 		return $this->inner->getParsedBody();
 	}
@@ -240,21 +240,12 @@ class ProxyRequest implements ServerRequestInterface
 		return $this->inner->getAttributes();
 	}
 
-	/**
-	 * @see getAttributes()
-	 * @param mixed  $default
-	 * @return mixed
-	 */
-	public function getAttribute(string $name, $default = null)
+	public function getAttribute(string $name, mixed $default = null): mixed
 	{
 		return $this->inner->getAttribute($name, $default);
 	}
 
-	/**
-	 * @see getAttributes()
-	 * @param mixed  $value
-	 */
-	public function withAttribute(string $name, $value): static
+	public function withAttribute(string $name, mixed $value): static
 	{
 		$new = clone $this;
 		$new->inner = $this->inner->withAttribute($name, $value);
@@ -262,9 +253,6 @@ class ProxyRequest implements ServerRequestInterface
 		return $new;
 	}
 
-	/**
-	 * @see getAttributes()
-	 */
 	public function withoutAttribute(string $name): static
 	{
 		$new = clone $this;

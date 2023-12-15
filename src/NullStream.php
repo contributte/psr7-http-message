@@ -15,6 +15,7 @@ class NullStream implements StreamInterface
 
 	public function close(): void
 	{
+		// Noop
 	}
 
 	/**
@@ -50,10 +51,12 @@ class NullStream implements StreamInterface
 
 	public function rewind(): void
 	{
+		// Noop
 	}
 
 	public function seek(int $offset, int $whence = SEEK_SET): void
 	{
+		// Noop
 	}
 
 	public function eof(): bool
