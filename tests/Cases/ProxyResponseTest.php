@@ -11,11 +11,6 @@ use Tester\TestCase;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-/**
- * Test: ProxyResponse
- *
- * @testCase
- */
 class ProxyResponseTest extends TestCase
 {
 

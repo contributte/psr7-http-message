@@ -3,6 +3,7 @@
 namespace Tests\Cases;
 
 use Contributte\Psr7\Psr7ServerRequestFactory;
+use Contributte\Tester\Environment;
 use Nette\Http\FileUpload;
 use Nette\Http\Request;
 use Nette\Http\UrlScript;
@@ -11,11 +12,6 @@ use Tester\TestCase;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-/**
- * Test: Psr7ServerRequestFactory
- *
- * @testCase
- */
 class Psr7ServerRequestFactoryTest extends TestCase
 {
 
@@ -50,11 +46,11 @@ class Psr7ServerRequestFactoryTest extends TestCase
 
 	public function testUploadedFiles(): void
 	{
-		file_put_contents(TMP_DIR . '/fake.txt', 'foobar');
+		file_put_contents(Environment::getTmpDir() . '/fake.txt', 'foobar');
 		$nette = new Request(
 			new UrlScript('https://nette.org'),
-			null,
-			[new FileUpload(['name' => 'fake.txt', 'type' => 'foo', 'size' => 10, 'tmp_name' => TMP_DIR . '/fake.txt', 'error' => 0])]
+			[],
+			[new FileUpload(['name' => 'fake.txt', 'type' => 'foo', 'size' => 10, 'tmp_name' => Environment::getTmpDir() . '/fake.txt', 'error' => 0])]
 		);
 		$request = Psr7ServerRequestFactory::fromNette($nette);
 		Assert::count(1, $request->getUploadedFiles());

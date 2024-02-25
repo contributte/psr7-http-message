@@ -8,11 +8,6 @@ use Tester\TestCase;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-/**
- * Test: Psr7Message
- *
- * @testCase
- */
 class Psr7MessageTest extends TestCase
 {
 

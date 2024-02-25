@@ -4,6 +4,7 @@ namespace Tests\Cases;
 
 use Contributte\Psr7\Exception\Logical\InvalidStateException;
 use Contributte\Psr7\Psr7Response;
+use Contributte\Tester\Utils\Httpkit;
 use Nette\Application\Response as ApplicationResponse;
 use Nette\Application\Responses\TextResponse;
 use Nette\Http\IResponse;
@@ -14,11 +15,6 @@ use Tests\Fixtures\JsonObject;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-/**
- * Test: Psr7Response
- *
- * @testCase
- */
 class Psr7ResponseTest extends TestCase
 {
 
@@ -119,7 +115,7 @@ class Psr7ResponseTest extends TestCase
 		Assert::type(IResponse::class, $this->response->getHttpResponse());
 		Assert::type(ApplicationResponse::class, $this->response->getApplicationResponse());
 
-		$this->response->send();
+		Httpkit::wrap(fn () => $this->response->send());
 	}
 
 	public function testSendWithoutHttpResponse(): void
@@ -138,14 +134,14 @@ class Psr7ResponseTest extends TestCase
 			Assert::true($this->response->hasHttpResponse());
 			Assert::type(IResponse::class, $this->response->getHttpResponse());
 
-			$this->response->send();
+			Httpkit::wrap(fn () => $this->response->send());
 		}, InvalidStateException::class, 'Cannot send response without Nette\Application\Application');
 	}
 
 	public function testSendBodyWithoutHttpResponse(): void
 	{
 		Assert::throws(function (): void {
-			$this->response->sendBody();
+			Httpkit::wrap(fn () => $this->response->sendBody());
 		}, InvalidStateException::class, 'Cannot send response without Nette\Http\Response');
 	}
 

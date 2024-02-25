@@ -9,11 +9,6 @@ use Tester\TestCase;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-/**
- * Test: Psr7ResponseFactory
- *
- * @testCase
- */
 class Psr7ResponseFactoryTest extends TestCase
 {
 

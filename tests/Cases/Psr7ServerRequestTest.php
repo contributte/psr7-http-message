@@ -12,11 +12,6 @@ use Tester\TestCase;
 
 require_once __DIR__ . '/../bootstrap.php';
 
-/**
- * Test: Psr7ServerRequest
- *
- * @testCase
- */
 class Psr7ServerRequestTest extends TestCase
 {
 
