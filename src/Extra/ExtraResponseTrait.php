@@ -81,4 +81,15 @@ trait ExtraResponseTrait
 		return $new;
 	}
 
+	/*
+	 * REDIRECT ***************************************************************
+	 */
+
+	public function withRedirect(string $url, int $statusCode = 302): static
+	{
+		return $this
+			->withStatus($statusCode)
+			->withHeader('Location', $url);
+	}
+
 }
