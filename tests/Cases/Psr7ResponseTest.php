@@ -88,6 +88,30 @@ class Psr7ResponseTest extends TestCase
 		Assert::equal('baz', $this->response->getHeaderLine('X-Bar'));
 	}
 
+	public function testWithRedirect(): void
+	{
+		$this->response = $this->response->withRedirect('https://example.com');
+
+		Assert::equal(302, $this->response->getStatusCode());
+		Assert::equal('https://example.com', $this->response->getHeaderLine('Location'));
+	}
+
+	public function testWithRedirectCustomStatusCode(): void
+	{
+		$this->response = $this->response->withRedirect('https://example.com', 301);
+
+		Assert::equal(301, $this->response->getStatusCode());
+		Assert::equal('https://example.com', $this->response->getHeaderLine('Location'));
+	}
+
+	public function testWithRedirect303(): void
+	{
+		$this->response = $this->response->withRedirect('https://example.com/other', 303);
+
+		Assert::equal(303, $this->response->getStatusCode());
+		Assert::equal('https://example.com/other', $this->response->getHeaderLine('Location'));
+	}
+
 	public function testOf(): void
 	{
 		$this->response = $this->response
