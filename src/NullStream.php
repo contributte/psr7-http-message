@@ -79,10 +79,7 @@ class NullStream implements StreamInterface
 		throw new RuntimeException('Null streams cannot write');
 	}
 
-	/**
-	 * @return null
-	 */
-	public function getMetadata(?string $key = null)
+	public function getMetadata(?string $key = null): mixed
 	{
 		return null;
 	}

@@ -9,6 +9,7 @@ This package is based on great [guzzle/psr7](https://github.com/guzzle/psr7) imp
 - [Setup](#setup)
 - [Psr7Request](#psr7request)
 - [Psr7Response](#psr7response)
+- [Bridge](#bridge)
 
 ## Setup
 
@@ -112,6 +113,18 @@ Additional methods (against PSR7 interface):
 - send(): void
 - sendHeaders(): void
 - sendBody(): void
+
+## Bridge
+
+### `Psr7Response`
+
+Nette Application response that wraps a PSR-7 `ResponseInterface`. Allows sending PSR-7 responses directly from Nette presenters.
+
+```php
+use Contributte\Psr7\Bridge\Psr7Response;
+
+$this->sendResponse(new Psr7Response($psr7));
+```
 
 ## API
 

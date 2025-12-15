@@ -64,10 +64,6 @@ trait ExtraResponseTrait
 		return $this->getBody()->getContents();
 	}
 
-	/*
-	 * HEADERS ****************************************************************
-	 */
-
 	/**
 	 * @param string[]|string[][] $headers
 	 */
@@ -80,10 +76,6 @@ trait ExtraResponseTrait
 
 		return $new;
 	}
-
-	/*
-	 * REDIRECT ***************************************************************
-	 */
 
 	public function withRedirect(string $url, int $statusCode = 302): static
 	{
