@@ -35,8 +35,10 @@ This package is based on great [guzzle/psr7](https://github.com/guzzle/psr7) imp
 
 - [Installation](#installation)
 - [Psr7Request](#psr7request)
+- [Psr7ServerRequest](#psr7serverrequest)
 - [Psr7Response](#psr7response)
 - [Bridge](#bridge)
+- [API](#api)
 
 ## Installation
 
@@ -63,7 +65,7 @@ $httpRequest = new Request();
 $psr7 = Psr7RequestFactory::fromNette($httpRequest);
 ```
 
-You can fill [`httpRequest`](https://api.nette.org/2.4/Nette.Http.Request.html) and [`applicationRequest`](https://api.nette.org/2.4/Nette.Application.Request.html) over methods:
+You can fill `Nette\Http\Request` and `Nette\Application\Request` over methods:
 
 ```php
 use Contributte\Psr7\Psr7RequestFactory;
@@ -110,7 +112,7 @@ $httpResponse = new Response();
 $psr7 = Psr7ResponseFactory::fromNette($httpResponse);
 ```
 
-You can fill [`httpResponse`](https://api.nette.org/2.4/Nette.Http.Response.html) and [`applicationResponse`](https://api.nette.org/2.4/Nette.Application.IResponse.html) over methods:
+You can fill `Nette\Http\Response` and `Nette\Application\IResponse` over methods:
 
 ```php
 use Contributte\Psr7\Psr7ResponseFactory;
@@ -155,96 +157,16 @@ $this->sendResponse(new Psr7Response($psr7));
 
 ## API
 
-**MessageInterface**
+This package wraps [guzzle/psr7](https://github.com/guzzle/psr7) and implements standard PSR-7 interfaces:
 
-- `getProtocolVersion: string`
-- `withProtocolVersion(string $version): static`
-- `getHeaders(): array`
-- `hasHeader(string $name): bool`
-- `getHeader(string $name): string[]`
-- `getHeaderLine(string $name): string`
-- `withHeader(string $name, string|string[] $value): static`
-- `withAddedHeader(string $name, string|string[] $value): static`
-- `withoutHeader(string $name): static`
-- `getBody(): StreamInterface`
-- `withBody(StreamInterface $body): static`
+- `Psr\Http\Message\RequestInterface`
+- `Psr\Http\Message\ServerRequestInterface`
+- `Psr\Http\Message\ResponseInterface`
+- `Psr\Http\Message\StreamInterface`
+- `Psr\Http\Message\UriInterface`
+- `Psr\Http\Message\UploadedFileInterface`
 
-**RequestInterface** << **MessageInterface**
-
-- `getRequestTarget(): string`
-- `withRequestTarget($requestTarget): static`
-- `getMethod(): string`
-- `withMethod(string $method): static`
-- `getUri(): UriInterface`
-- `withUri(UriInterface $uri, bool $preserveHost = false): static`
-
-**ServerRequestInterface** << **RequestInterface**
-
-- `getServerParams(): array`
-- `getCookieParams(): array`
-- `withCookieParams(array $cookies): static`
-- `getQueryParams(): array`
-- `withQueryParams(array $query): static`
-- `getUploadedFiles(): UploadedFileInterface[]`
-- `withUploadedFiles(array $uploadedFiles): static`
-- `getParsedBody(): mixed`
-- `withParsedBody($data): static`
-- `getAttributes(): mixed[]`
-- `getAttribute(string $name, $default = null): mixed`
-- `withAttribute(string $name, $value): static`
-- `withoutAttribute(string $name): static`
-
-**ResponseInterface** << **MessageInterface**
-
-- `getStatusCode(): int`
-- `withStatus(int $code, string $reasonPhrase = ''): static`
-- `getReasonPhrase(): string`
-
-**StreamInterface**
-
-- `__toString(): string`
-- `close(): void`
-- `detach(): ?resource`
-- `getSize(): ?int`
-- `tell(): int`
-- `eof(): bool`
-- `isSeekable(): bool`
-- `seek(int $offset, int $whence = SEEK_SET): void`
-- `rewind(): void`
-- `isWritable(): bool`
-- `write($string): void`
-- `isReadable(): bool`
-- `read($length): string`
-- `getContents(): string`
-- `getMetadata(?string $key = null): mixed`
-
-**UriInterface**
-
-- `getScheme(): string`
-- `withScheme(string $scheme): static`
-- `getAuthority(): string`
-- `getUserInfo(): string`
-- `withUserInfo(string $user, ?string $password = null): static`
-- `getHost(): string`
-- `withHost(string $host): static`
-- `getPort(): ?int`
-- `withPort(?int $port): static`
-- `getPath(): string`
-- `withPath(string $path): static`
-- `getQuery(): string`
-- `withQuery(string $query): static`
-- `getFragment(): string`
-- `withFragment(string $fragment): static`
-- `__toString(): string`
-
-**UploadedFileInterface**
-
-- `getStream(): StreamInterface`
-- `moveTo($targetPath): void`
-- `getSize(): ?int`
-- `getError(): int`
-- `getClientFilename(): ?string`
-- `getClientMediaType(): ?string`
+See the official [PSR-7 specification](https://www.php-fig.org/psr/psr-7/) for full interface details. Package-specific helper methods are documented above.
 
 ## Development
 
