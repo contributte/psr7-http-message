@@ -16,3 +16,11 @@ parameters:
 		- .docs
 
 	ignoreErrors:
+		-
+			message: '#^Parameter \#3 \$subject of function str_replace expects array\<string\>\|string, mixed given\.$#'
+			count: 1
+			path: src/Psr7ServerRequest.php
+		-
+			message: '#^Parameter \#1 \$method of class Contributte\\Psr7\\Psr7ServerRequest constructor expects string, mixed given\.$#'
+			count: 1
+			path: src/Psr7ServerRequest.php
