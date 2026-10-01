@@ -68,11 +68,11 @@ class Psr7ServerRequest extends ServerRequest
 
 	public static function fromGlobals(): ServerRequestInterface
 	{
-		$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+		$method = isset($_SERVER['REQUEST_METHOD']) && is_string($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
 		$headers = function_exists('getallheaders') ? getallheaders() : [];
 		$uri = self::getUriFromGlobals();
 		$body = new LazyOpenStream('php://input', 'r+');
-		$protocol = isset($_SERVER['SERVER_PROTOCOL']) ? str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1';
+		$protocol = isset($_SERVER['SERVER_PROTOCOL']) && is_string($_SERVER['SERVER_PROTOCOL']) ? str_replace('HTTP/', '', $_SERVER['SERVER_PROTOCOL']) : '1.1';
 
 		$serverRequest = new self($method, $uri, $headers, $body, $protocol, $_SERVER);
 
